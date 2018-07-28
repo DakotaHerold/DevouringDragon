@@ -454,6 +454,8 @@ MonoBehaviour:
   - {fileID: 1728929251923756, guid: b48ea03f580fc7644adb1916cc12bca2, type: 2}
   towers:
   - {fileID: 1873364329652540, guid: 4ad0188ec75673242977bb72be1e3dc6, type: 2}
+  arrowPrefab: {fileID: 1166803058009150, guid: f1325325d8ffc6442966f9e0592a98c9,
+    type: 2}
   playerSpeed: 5
   spawnDelay: 2
   spawnInterval: 20

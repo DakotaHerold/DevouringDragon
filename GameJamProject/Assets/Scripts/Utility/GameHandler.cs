@@ -20,6 +20,8 @@ public class GameHandler : Singleton<GameHandler>
     public float spawnInterval; // Use this to determine when we up the spawn speed
     public float forcedTowerDelay; // Time before it can drop a tower again...
     public float widthFudgeFactor; // Used to vary the x within the lanes...
+    private float distanceTraveled = 0f;
+    public float DistanceTravelled { get { return distanceTraveled; } set { distanceTraveled = value; } }
 
     public int score;
 
@@ -32,6 +34,45 @@ public class GameHandler : Singleton<GameHandler>
     //private float randOffset = 1f;
     private float lastSpawnInterval = 0f;
     private float lastTowerSpawn = 0;
+    private float pausedPlayerSpeed = -1f;
+
+    public void NewGame()
+    {
+        distanceTraveled = 0f;
+
+        // Clean out old prefabs...
+        GameObject[] edibles = GameObject.FindGameObjectsWithTag("Edible");
+        foreach(GameObject go in edibles)
+        {
+            Destroy(go);
+        }
+        GameObject[] towers = GameObject.FindGameObjectsWithTag("Tower");
+        foreach (GameObject go in towers)
+        {
+            Destroy(go);
+        }
+    }
+
+    public void PauseGame()
+    {
+        pausedPlayerSpeed = playerSpeed;
+        playerSpeed = 0f;
+    }
+
+    public void UnPauseGame()
+    {
+        if(pausedPlayerSpeed > 0f)
+        {
+            playerSpeed = pausedPlayerSpeed;
+            pausedPlayerSpeed = -1f;
+        }
+    }
+
+    private void Start()
+    {
+        //NewGame();
+        //PauseGame();
+    }
 
     private void FixedUpdate()
     {

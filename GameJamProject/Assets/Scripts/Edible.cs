@@ -9,9 +9,12 @@ public class Edible : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        float dist = GameHandler.Instance.playerSpeed * Time.deltaTime;
-        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - dist);
-        if (this.gameObject.transform.position.y < -20) EdibleDestroyed(false);
+        if (GameHandler.Instance.playerSpeed > 0)
+        {
+            float dist = GameHandler.Instance.playerSpeed * Time.deltaTime;
+            this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - dist);
+            if (this.gameObject.transform.position.y < -20) EdibleDestroyed(false);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
