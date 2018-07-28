@@ -25,7 +25,7 @@ public class Tower : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
         float dist = GameHandler.Instance.playerSpeed * Time.deltaTime;
-        //this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - dist);
+        this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - dist);
         if (this.gameObject.transform.position.y < -20) TowerDestroyed();
 
         if(coolingDown)
