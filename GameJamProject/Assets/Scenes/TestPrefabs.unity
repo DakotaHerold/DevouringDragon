@@ -401,6 +401,14 @@ Prefab:
       propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4031910520320800, guid: 84b2fa07eb037cb4c8ecbe6addd02ef9, type: 2}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4031910520320800, guid: 84b2fa07eb037cb4c8ecbe6addd02ef9, type: 2}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84b2fa07eb037cb4c8ecbe6addd02ef9, type: 2}
   m_IsPrefabParent: 0
