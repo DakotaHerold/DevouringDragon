@@ -34,7 +34,7 @@ public class GameHandler : Singleton<GameHandler>
     private void FixedUpdate()
     {
         float curTime = Time.time;
-        if ((curTime + lastSpawnTime1) > nextSpawnTime1)
+        if (curTime > nextSpawnTime1)
         {
             lastSpawnTime1 = curTime;
             nextSpawnTime1 = lastSpawnTime1 + (spawnDelay * (1f + Random.value));
@@ -51,7 +51,7 @@ public class GameHandler : Singleton<GameHandler>
                 Instantiate(towers[index], lane1.position, Quaternion.identity);
             }
         }
-        if ((curTime + lastSpawnTime2) > nextSpawnTime2)
+        if (curTime > nextSpawnTime2)
         {
             lastSpawnTime2 = curTime;
             nextSpawnTime2 = lastSpawnTime2 + (spawnDelay * (1f + Random.value));
@@ -68,7 +68,7 @@ public class GameHandler : Singleton<GameHandler>
                 Instantiate(towers[index], lane2.position, Quaternion.identity);
             }
         }
-        if ((curTime + lastSpawnTime3) > nextSpawnTime3)
+        if (curTime  > nextSpawnTime3)
         {
             lastSpawnTime3 = curTime;
             nextSpawnTime3 = lastSpawnTime3 + (spawnDelay * (1f + Random.value));
@@ -88,8 +88,8 @@ public class GameHandler : Singleton<GameHandler>
         if ((curTime - lastSpawnInterval) > spawnInterval)
         {
             lastSpawnInterval = curTime;
-            playerSpeed += .5f;
-            spawnDelay = spawnDelay - 0.5f;
+            playerSpeed += 1f;
+            spawnDelay = spawnDelay * 0.75f;
         }
     }
 }

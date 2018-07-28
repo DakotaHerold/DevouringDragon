@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    public GameObject ground;
     public Transform scroll1;
     public Transform scroll2;
     public Transform scroll3;
