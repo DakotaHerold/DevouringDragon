@@ -31,7 +31,7 @@ public class Edible : MonoBehaviour {
     {
         // Here we want to eat the edible
         GameHandler.Instance.score += points;
+        //OnEdibleDetroyed();
         Destroy(gameObject, 0.2f);
-        OnEdibleDetroyed();
     }
 }
