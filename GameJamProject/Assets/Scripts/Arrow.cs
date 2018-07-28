@@ -19,7 +19,7 @@ public class Arrow : MonoBehaviour {
             transform.position = newPos;
             transform.up = direction;
 
-            if (transform.position.x < -200 || transform.position.x > 200)
+            if (transform.position.x < -50 || transform.position.x > 50)
             {
                 Destroy(gameObject);
             }
