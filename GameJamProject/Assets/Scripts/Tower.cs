@@ -6,7 +6,11 @@ public class Tower : MonoBehaviour
 {
     private Collider2D bounds; 
     public int points;
-    public float targetingOffsetX = 2f; 
+    public float targetingOffsetX = 2f;
+
+    private bool coolingDown = false;
+    private float coolTimer = 0.0f;
+    private float coolTime = 0.25f; 
 
     public delegate void EventAction();
     //public static event EventAction OnTowerEntered;
@@ -14,7 +18,8 @@ public class Tower : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        bounds = GetComponent<Collider2D>(); 
+        bounds = GetComponent<Collider2D>();
+        coolTimer = coolTime; 
 	}
 	
 	// Update is called once per frame
@@ -22,9 +27,19 @@ public class Tower : MonoBehaviour
         float dist = GameHandler.Instance.playerSpeed * Time.deltaTime;
         //this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - dist);
         if (this.gameObject.transform.position.y < -20) TowerDestroyed();
+
+        if(coolingDown)
+        {
+            coolTimer -= 1f * Time.deltaTime; 
+            if(coolTimer <= 0)
+            {
+                coolTimer = coolTime;
+                coolingDown = false; 
+            }
+        }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
         PlayerController playerController = collision.gameObject.GetComponent<PlayerController>(); 
         if(playerController != null)
@@ -33,25 +48,46 @@ public class Tower : MonoBehaviour
 
     public void TowerSpaceEntered(PlayerController player)
     {
-        Debug.Log("Targeting!");
-
-        Vector3 playerDirection; 
-        if(player.IsRight)
+        if(!coolingDown)
         {
-            playerDirection = player.transform.right * targetingOffsetX; 
-        }
-        else
-        {
-            playerDirection = -player.transform.right * targetingOffsetX; 
-        }
+            coolingDown = true;
+            Debug.Log("Targeting!");
 
+            Vector3 playerDirection;
+            if (player.IsRight)
+            {
+                playerDirection = player.transform.right;
+            }
+            else
+            {
+                playerDirection = -player.transform.right;
+            }
+
+            playerDirection = player.transform.right + player.transform.up;
+
+            if (player.transform.position.y > transform.position.y)
+            {
+                playerDirection = player.transform.position + playerDirection;
+            }
+            else
+            {
+                playerDirection = player.transform.position - playerDirection;
+            }
+            
+            
+            FireArrow(playerDirection);
+        }
+        
+
+
+    }
+
+    private void FireArrow(Vector3 direction)
+    {
         GameObject arrowGO = Instantiate(GameHandler.Instance.arrowPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         Arrow arrow = arrowGO.GetComponent<Arrow>();
-        //arrow.transform.position = transform.position;
-        arrow.direction = player.transform.position + playerDirection;
-        arrow.initialized = true; 
-
-
+        arrow.direction = direction;
+        arrow.initialized = true;
     }
 
     public void TowerDestroyed()

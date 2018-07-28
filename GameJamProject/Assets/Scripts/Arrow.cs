@@ -5,7 +5,7 @@ using UnityEngine;
 public class Arrow : MonoBehaviour {
 
     public Vector3 direction; 
-    public float speed = 2f;
+    public float speed = 1f;
 
     public bool initialized = false; 
 
@@ -17,6 +17,7 @@ public class Arrow : MonoBehaviour {
 
             Vector3 newPos = transform.position + velocity;
             transform.position = newPos;
+            transform.up = direction; 
 
             //if (transform.position.x < 2000 || transform.position.x > 2000)
             //{
