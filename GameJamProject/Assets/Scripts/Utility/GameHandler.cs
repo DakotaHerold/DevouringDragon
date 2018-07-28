@@ -41,13 +41,13 @@ public class GameHandler : Singleton<GameHandler>
             int index = Mathf.RoundToInt(Random.value);
             if (index > 0)
             {
-                index = Mathf.RoundToInt(Random.value * edibles.Count);
+                index = Mathf.RoundToInt(Random.value * edibles.Count-1);
                 Instantiate(edibles[index], lane1.position, Quaternion.identity);
             }
             else if (curTime > lastTowerSpawn + forcedTowerDelay)
             {
                 lastTowerSpawn = curTime;
-                index = Mathf.RoundToInt(Random.value * towers.Count);
+                index = Mathf.RoundToInt(Random.value * towers.Count-1);
                 Instantiate(towers[index], lane1.position, Quaternion.identity);
             }
         }
@@ -58,13 +58,13 @@ public class GameHandler : Singleton<GameHandler>
             int index = Mathf.RoundToInt(Random.value);
             if (index > 0)
             {
-                index = Mathf.RoundToInt(Random.value * edibles.Count);
+                index = Mathf.RoundToInt(Random.value * edibles.Count-1);
                 Instantiate(edibles[index], lane2.position, Quaternion.identity);
             }
             else if (curTime > lastTowerSpawn + forcedTowerDelay)
             {
                 lastTowerSpawn = curTime;
-                index = Mathf.RoundToInt(Random.value * towers.Count);
+                index = Mathf.RoundToInt(Random.value * towers.Count-1);
                 Instantiate(towers[index], lane2.position, Quaternion.identity);
             }
         }
@@ -75,13 +75,13 @@ public class GameHandler : Singleton<GameHandler>
             int index = Mathf.RoundToInt(Random.value);
             if (index > 0)
             {
-                index = Mathf.RoundToInt(Random.value * edibles.Count);
+                index = Mathf.RoundToInt(Random.value * edibles.Count-1);
                 Instantiate(edibles[index], lane3.position, Quaternion.identity);
             }
             else if (curTime > lastTowerSpawn + forcedTowerDelay)
             {
                 lastTowerSpawn = curTime;
-                index = Mathf.RoundToInt(Random.value * towers.Count);
+                index = Mathf.RoundToInt(Random.value * towers.Count-1);
                 Instantiate(towers[index], lane3.position, Quaternion.identity);
             }
         }
