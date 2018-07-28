@@ -29,18 +29,18 @@ public class Arrow : MonoBehaviour {
 
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerController controller = collision.gameObject.GetComponent<PlayerController>(); 
-            if(controller != null)
+            PlayerController controller = collision.gameObject.GetComponent<PlayerController>();
+            if (controller != null)
             {
-                controller.Shrink(); 
+                controller.Shrink();
                 Destroy(gameObject);
             }
-            
+
         }
-        
     }
+
 }

@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour {
     private float maxYSpeed = 10.0f;
     private float minYSpeed = 5.0f;
 
+    private Vector2 minScale;
+    private Vector2 baseScale;
+    public float shrinkOffset = 0.01f;
+    public float growthOffset = 0.1f; 
+
     private bool isRight = true;
     public bool IsRight
     {
@@ -49,7 +54,10 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         coolDownTimer = coolDownBase;
         minYPos = transform.position.y;
-        maxYPos = minYPos + 6.0f; 
+        maxYPos = minYPos + 6.0f;
+
+        baseScale = new Vector2(transform.localScale.x, transform.localScale.y);
+        minScale = new Vector2(0.1f, 0.1f); 
     }
 	
 	// Update is called once per frame
@@ -145,12 +153,29 @@ public class PlayerController : MonoBehaviour {
 
     public void Shrink()
     {
-        Debug.Log("Shrink!"); 
+        Debug.Log("Shrink!");
+
+        Vector3 dragonScale = transform.localScale;
+        dragonScale.x -= shrinkOffset;
+        dragonScale.y -= shrinkOffset;
+        transform.localScale = dragonScale; 
+
+        if(dragonScale.x <= minScale.x)
+        {
+            Debug.Log("Game over!"); 
+        }
+
+        
     }
 
     public void Grow()
     {
+        Debug.Log("Grow!");
 
+        Vector3 dragonScale = transform.localScale;
+        dragonScale.x += growthOffset;
+        dragonScale.y += growthOffset;
+        transform.localScale = dragonScale;
     }
 
     /// <returns>The X-Value of the player position</returns>

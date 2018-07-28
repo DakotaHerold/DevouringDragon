@@ -51,7 +51,7 @@ public class Tower : MonoBehaviour
         if(!coolingDown)
         {
             coolingDown = true;
-            Debug.Log("Targeting!");
+            //Debug.Log("Targeting!");
 
             Vector3 playerDirection;
             if (player.IsRight)
