@@ -51,12 +51,12 @@ public class InputHandler : Singleton<InputHandler>
             // Update input from rewired for each player here 
             // Example:  players[iPlayer].isJumpDown = rewiredPlayers[iPlayer].GetButtonDown(RewiredConsts.Action.Jump);
         players[0].Swerve = rewiredPlayers[0].GetButtonDown(RewiredConsts.Action.Swerve); 
-
-        if(players[0].Swerve)
-        {
-            Debug.Log("Swerve pressed!"); 
-        }
         //}
+    }
+
+    bool SwervedPressed()
+    {
+        return players[0].Swerve; 
     }
 }
 
