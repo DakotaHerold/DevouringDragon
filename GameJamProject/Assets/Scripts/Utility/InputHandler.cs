@@ -6,6 +6,20 @@ using UnityEngine;
 public class PlayerInputData
 {
     // Player input variables go here
+    private bool swerve;
+
+    public bool Swerve
+    {
+        get
+        {
+            return swerve;
+        }
+
+        set
+        {
+            swerve = value;
+        }
+    }
 }
 
 public class InputHandler : Singleton<InputHandler>
@@ -32,11 +46,17 @@ public class InputHandler : Singleton<InputHandler>
     // Update is called once per frame
     void Update()
     {
-        for (int iPlayer = 0; iPlayer < rewiredPlayers.Count; ++iPlayer)
-        {
+        //for (int iPlayer = 0; iPlayer < rewiredPlayers.Count; ++iPlayer)
+        //{
             // Update input from rewired for each player here 
             // Example:  players[iPlayer].isJumpDown = rewiredPlayers[iPlayer].GetButtonDown(RewiredConsts.Action.Jump);
+        players[0].Swerve = rewiredPlayers[0].GetButtonDown(RewiredConsts.Action.Swerve); 
+
+        if(players[0].Swerve)
+        {
+            Debug.Log("Swerve pressed!"); 
         }
+        //}
     }
 }
 
