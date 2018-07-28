@@ -191,9 +191,13 @@ public class PlayerController : MonoBehaviour {
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isRight = !isRight;
-        hitWall = true;
-        StartCoroutine(ResetWallHit()); 
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+        {
+            isRight = !isRight;
+            hitWall = true;
+            StartCoroutine(ResetWallHit());
+        }
+        
     }
 
     IEnumerator ResetWallHit()
