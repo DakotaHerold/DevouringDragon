@@ -4,43 +4,107 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    private bool movingHorizontal = true;
+    private float slowedSpeedIncrement = 0.01f; 
+    private float baseSpeedIncrement = 0.1f; 
     private float speedIncrement = 0.1f; 
     private float maxDriftSpeed = 7.5f;
     private float swerveSpeed = 9.5f; 
     private float currentDriftSpeed = 1f; 
     private bool isRight = true;
     private bool boosted = false;
-    private float baseSwerveTime = 2f;
-    private float currentSwerveTime = 0.0f; 
+    private float baseSwerveTime = 0.75f;
+    private float currentSwerveTime = 0.0f;
 
+    private float coolDownTimer = 0.0f; 
+    private float coolDownBase = 0.25f;
+    private bool coolingDown = false;
+
+    private float timerIncrement = 0.5f;
+
+    private bool movingUp = false; 
+    private float currentYSpeed = 0.0f;
+    private float maxYPos; 
+    private float minYPos;
+    private float ySpeed = 1.0f;
+    private float maxYSpeed = 10.0f;
+    private float minYSpeed = 5.0f; 
 
 	// Use this for initialization
 	void Start () {
-	}
+        coolDownTimer = coolDownBase;
+        minYPos = transform.position.y;
+        maxYPos = minYPos + 6.0f; 
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-        if(InputHandler.Instance.SwervedPressed())
+        Vector3 newPos = transform.position;
+
+        if (coolingDown)
+        {
+            coolDownTimer -= timerIncrement * Time.deltaTime;
+            //Debug.Log("Cooling...");
+             
+            if(coolDownTimer <= 0) //&& !movingUp && (newPos.y <= minYPos)
+            {
+                coolDownTimer = coolDownBase;
+                coolingDown = false; 
+                //Debug.Log("Cooldown complete");
+            }
+        }
+        else if(InputHandler.Instance.SwervedPressed() && !coolingDown)
         {
             // Change direction and begin boosting
             isRight = !isRight;
             boosted = true;
+            //movingUp = true; 
+            coolingDown = true; 
             currentDriftSpeed = swerveSpeed;
             currentSwerveTime = 0;
         }
 
-        Vector3 newPos = transform.position;
 
-        if (isRight)
+        if(movingHorizontal)
         {
-            newPos.x += currentDriftSpeed * Time.deltaTime;
+            if (isRight)
+            {
+                newPos.x += currentDriftSpeed * Time.deltaTime;
+            }
+            else
+            {
+                newPos.x -= currentDriftSpeed * Time.deltaTime;
+            }
         }
-        else
-        {
-            newPos.x -= currentDriftSpeed * Time.deltaTime;
-        }
+        
 
+        //if(movingUp)
+        //{
+        //    ySpeed = minYSpeed;
+        //    newPos.y += ySpeed * Time.deltaTime; 
+        //}
+        //else
+        //{
+        //    ySpeed = maxYSpeed;
+        //    newPos.y -= ySpeed * Time.deltaTime;
+        //}
+
+        //if(newPos.y >= maxYPos)
+        //{
+        //    movingUp = false; 
+        //}
+
+        //if (newPos.y > maxYPos)
+        //{
+        //    movingHorizontal = false;
+        //}
+        //else if(newPos.y <= minYPos)
+        //{
+        //    movingHorizontal = true;
+        //}
+
+        newPos.y = Mathf.Clamp(newPos.y, minYPos, maxYPos);
         transform.position = newPos;
         // Increment drift speed. Checks if player is swerving and 
         if(!boosted)
@@ -51,14 +115,16 @@ public class PlayerController : MonoBehaviour {
         else
         {
             currentDriftSpeed = swerveSpeed; 
-            currentSwerveTime += 0.5f * Time.deltaTime;
+            currentSwerveTime += timerIncrement * Time.deltaTime;
             if (currentSwerveTime >= baseSwerveTime)
             {
                 boosted = false;
                 currentDriftSpeed = maxDriftSpeed; 
             }
         }
-        Debug.Log(currentDriftSpeed);
+        //Debug.Log(currentDriftSpeed);
+
+        
 
     }
 
