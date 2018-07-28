@@ -13,6 +13,7 @@ public class GameHandler : Singleton<GameHandler>
     // Store the prefabs here...
     public List<GameObject> edibles;
     public List<GameObject> towers;
+    public GameObject arrowPrefab; 
 
     public float playerSpeed; // How fast to scroll and simulate the player speed through the world
     public float spawnDelay; // Current time between spawns

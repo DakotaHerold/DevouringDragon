@@ -11,7 +11,8 @@ public class PlayerController : MonoBehaviour {
     private float maxDriftSpeed = 7.5f;
     private float swerveSpeed = 9.5f; 
     private float currentDriftSpeed = 1f; 
-    private bool isRight = true;
+    
+
     private bool boosted = false;
     private float baseSwerveTime = 0.75f;
     private float currentSwerveTime = 0.0f;
@@ -28,10 +29,24 @@ public class PlayerController : MonoBehaviour {
     private float minYPos;
     private float ySpeed = 1.0f;
     private float maxYSpeed = 10.0f;
-    private float minYSpeed = 5.0f; 
+    private float minYSpeed = 5.0f;
 
-	// Use this for initialization
-	void Start () {
+    private bool isRight = true;
+    public bool IsRight
+    {
+        get
+        {
+            return isRight;
+        }
+
+        set
+        {
+            isRight = value;
+        }
+    }
+
+    // Use this for initialization
+    void Start () {
         coolDownTimer = coolDownBase;
         minYPos = transform.position.y;
         maxYPos = minYPos + 6.0f; 
@@ -57,7 +72,7 @@ public class PlayerController : MonoBehaviour {
         else if(InputHandler.Instance.SwervedPressed() && !coolingDown)
         {
             // Change direction and begin boosting
-            isRight = !isRight;
+            IsRight = !IsRight;
             boosted = true;
             //movingUp = true; 
             coolingDown = true; 
@@ -68,7 +83,7 @@ public class PlayerController : MonoBehaviour {
 
         if(movingHorizontal)
         {
-            if (isRight)
+            if (IsRight)
             {
                 newPos.x += currentDriftSpeed * Time.deltaTime;
             }
@@ -125,6 +140,16 @@ public class PlayerController : MonoBehaviour {
         //Debug.Log(currentDriftSpeed);
 
         
+
+    }
+
+    public void Shrink()
+    {
+        Debug.Log("Shrink!"); 
+    }
+
+    public void Grow()
+    {
 
     }
 
