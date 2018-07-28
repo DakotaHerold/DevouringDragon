@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4376004524027626}
-  - component: {fileID: 212022292628231048}
+  - component: {fileID: 212709132481015306}
   - component: {fileID: 58877070766996536}
   - component: {fileID: 114591906297555660}
   m_Layer: 0
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   points: 0
   targetingOffsetX: 2
---- !u!212 &212022292628231048
+--- !u!212 &212709132481015306
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.64, y: 0.64}
+  m_Size: {x: 3, y: 3}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
