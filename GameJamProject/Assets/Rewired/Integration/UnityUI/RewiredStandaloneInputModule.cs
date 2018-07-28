@@ -185,12 +185,27 @@ namespace Rewired.Integration.UnityUI {
             get { return m_allowMouseInputIfTouchSupported; }
             set { m_allowMouseInputIfTouchSupported = value; }
         }
+        
+        /// <summary>
+        /// Allows touch input to be used to select elements.
+        /// </summary>
+        public bool allowTouchInput {
+            get { return m_allowTouchInput; }
+            set { m_allowTouchInput = value; }
+        }
 
         private bool isMouseSupported {
             get {
                 if(!Input.mousePresent) return false;
                 if(!m_allowMouseInput) return false;
                 return isTouchSupported ? m_allowMouseInputIfTouchSupported : true;
+            }
+        }
+        
+        private bool isTouchAllowed {
+            get {
+                if(!isTouchSupported) return false;
+                return m_allowTouchInput;
             }
         }
 
@@ -255,6 +270,13 @@ namespace Rewired.Integration.UnityUI {
         [SerializeField]
         [Tooltip("Allows the mouse to be used to select elements if the device also supports touch control.")]
         private bool m_allowMouseInputIfTouchSupported = true;
+        
+        /// <summary>
+        /// Allows touch input to be used to select elements.
+        /// </summary>
+        [SerializeField]
+        [Tooltip("Allows touch input to be used to select elements.")]
+        private bool m_allowTouchInput = true;
 
         /// <summary>
         /// Forces the module to always be active.
@@ -402,7 +424,7 @@ namespace Rewired.Integration.UnityUI {
             }
 
             // Touch input
-            if(isTouchSupported) {
+            if(isTouchAllowed) {
                 for(int i = 0; i < Input.touchCount; ++i) {
                     Touch input = Input.GetTouch(i);
                     shouldActivate |= input.phase == TouchPhase.Began
@@ -458,7 +480,7 @@ namespace Rewired.Integration.UnityUI {
         }
 
         private bool ProcessTouchEvents() {
-            if(!isTouchSupported) return false;
+            if(!isTouchAllowed) return false;
 
             for(int i = 0; i < Input.touchCount; ++i) {
                 Touch input = Input.GetTouch(i);

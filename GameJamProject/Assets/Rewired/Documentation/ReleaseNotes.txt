@@ -1,8 +1,54 @@
-1.1.17.1:
+1.1.18.0:
+
+    Changes:
+      - Added Input Manager mappings for Unity joysticks 12-16 in Unity 2018+.
+      - Improved XML handling.
+      - Added option to export data to JSON.
+      - Added internal checks and error logging when attempting to use invalidated Rewired objects created by a Rewired Input Manager that has been destroyed or reset.
+      - Modified Control Mapper assignment swapping system to prevent user from creating non-visible mappings under certain scenarios when a swap of a certain combination of full-axis and split-axis fields would create an additional mapping that wouldn't fit in the visual display based on the number of columns chosen for the current Controller type. The "Swap" button is no longer displayed if the swap operation would create a non-visible mapping.
+      - Rewired Standalone Input Module: Added "Allow Touch Input" inspector option.
+      - Added support for Flight Stick, Steering Wheel, Guitar, and Drum controller types on PS4 platform.
+      - Added Six DoF Controller Template option to PlayMaker integration.
+      - Added Six DoF Controller Template option to Behavior Designer integration.
+      - Added ControllerTemplateMap system for saving and loading maps for Controller Templates as opposed to maps for specific controllers.
+      - Modified many PlayMaker Actions removing required data storage fields when unnecessary.
+      - Re-created Bolt integration due to breaking changes made in Bolt 1.4.0.
+      
+    API Changes:
+      - Added ControllerMap.ToJsonString method.
+      - Added ControllerMap.ToControllerTemplateMap method.
+      - Added CalibrationMap.ToJsonString method.
+      - Added CalibrationMap.ImportJsonString method.
+      - Added CalibrationMap.ImportXmlString method.
+      - Added InputBehavior.ToJsonString method.
+      - Added InputBehavior.ImportJsonString method.
+      - Added ControllerWithAxes.ImportCalibrationMapFromJsonString method.
+      - Added Player.ControllerHelper.MapHelper.AddMapFromJson methods.
+      - Added PS4ControllerExtension class.
+      - Added ControllerMap.controller property.
+      - Added ControllerTemplateMap class.
+      - Added ControllerTemplateActionElementMap class.
+      - Added ControllerTemplateActionAxisMap class.
+      - Added ControllerTemplateActionButtonMap class.
+
+    New Controller Definitions:
+      - 3Dconnexion SpaceMouse - includes support for SpaceMouse Compact and SpaceMouse Wireless.
+      - Sony PS4 Flight Stick
+      - Sony PS4 Steering Wheel
+      - Sony PS4 Guitar
+      - Sony PS4 Drums
 
     Modified Controller Definitions:
       - 3Dconnexion SpaceNavigator: Changed display name to "3Dconnexion SpaceNavigator".
       - 3Dconnexion SpaceExplorer: Changed display name to "3Dconnexion SpaceExplorer".
+
+    Bug Fixes:
+      - Control Mapper: Fixed issue where swapping assignments on a conflict could drop the assignment instead of swapping it in certain scenarios.
+      - Control Mapper navigation now works properly in all Canvas space modes.
+      - Unity Editor, native input: Fixed crash when a critical exception was thrown during initialization and then subsequently re-importing scripts or DLLs in the project.
+      - Fixed exceptions thrown when recompiling during Play mode introduced in recent update.
+      - WebGL builds no longer log erroneous error message saying native input could not be initialized.
+      - Enabling and disabling the Rewired Input Manager with OnGUI enabled in Settings no longer causes multiple OnGUIHelper components to be added to the Rewired Input Manager.
 
 1.1.17.0:
 

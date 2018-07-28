@@ -1033,6 +1033,43 @@ MonoBehaviour:
       joystickId: 4
       joystickId2: 0
       splitAxis: 0
+  - id: 6
+    name: 3DConnexion SpaceMouse
+    joystickGuid: 151f35f4-43ab-4ae2-b8b9-d0ba9e626684
+    fileGuid: 1f6828ee3e5f79e42a6ec393edcf8875
+    elementIdentifierMappings:
+    - templateId: 0
+      joystickId: 1
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 1
+      joystickId: 0
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 2
+      joystickId: 2
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 3
+      joystickId: 5
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 4
+      joystickId: 4
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 5
+      joystickId: 3
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 12
+      joystickId: 13
+      joystickId2: 0
+      splitAxis: 0
+    - templateId: 13
+      joystickId: 14
+      joystickId2: 0
+      splitAxis: 0
   - id: 2
     name: 3DRudder
     joystickGuid: 4c2437d8-438b-400f-bd43-16ba0aadfcc1
@@ -1066,4 +1103,4 @@ MonoBehaviour:
   - elementIdentifierId: 54
     data: '{"eid_positionX":1,"eid_positionY":2,"eid_positionZ":0,"eid_rotationX":3,"eid_rotationY":5,"eid_rotationZ":4}'
   elementIdentifierIdCounter: 67
-  joystickIdCounter: 6
+  joystickIdCounter: 7

@@ -4083,6 +4083,20 @@
             <param name="useRawValues">Use raw axis values</param>
             <returns>Timestamp</returns>
         </member>
+        <member name="M:Rewired.ControllerWithAxes.ImportCalibrationMapFromXmlString(System.String)">
+            <summary>
+            Imports a Calibration Map from XML.
+            </summary>
+            <param name="xmlString">The XML string.</param>
+            <returns>Returns true on success, false on failure.</returns>
+        </member>
+        <member name="M:Rewired.ControllerWithAxes.ImportCalibrationMapFromJsonString(System.String)">
+            <summary>
+            Imports a Calibration Map from JSON.
+            </summary>
+            <param name="jsonString">The JSON string.</param>
+            <returns>Returns true on success, false on failure.</returns>
+        </member>
         <member name="P:Rewired.ControllerWithAxes.axisCount">
             <summary>
             The axis count in the controller.
@@ -5538,6 +5552,46 @@
             The rotation Z axis.
             </summary>
         </member>
+        <member name="T:Rewired.ControllerTemplateActionElementMap">
+            <summary>
+            Maps an Action to a Controller Template element.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateActionElementMap.elementType">
+            <summary>
+            The Controller Template Element type.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateActionElementMap.enabled">
+            <summary>
+            Is the map enabled? Disabled maps will never return input.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateActionElementMap.actionId">
+            <summary>
+            The id of the Action to which the element is bound.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateActionElementMap.elementIdentifierId">
+            <summary>
+            Gets the element type of the Controller Template element bound to the Action.
+            </summary>
+        </member>
+        <member name="T:Rewired.ControllerTemplateActionButtonMap">
+            <summary>
+            Maps an Action to a Controller Template Button element.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateActionButtonMap.axisContribution">
+            <summary>
+            The contribution to the Action's final value when queried as an axis.
+            </summary>
+        </member>
+        <member name="T:Rewired.ControllerTemplateActionAxisMap">
+            <summary>
+            Maps an Action to a Controller Template Axis element.
+            </summary>
+        </member>
         <member name="T:Rewired.IControllerTemplateElementSource">
             <summary>
             Interface for a Controller Template Element Source.
@@ -5835,6 +5889,82 @@
         <member name="F:Rewired.ControllerTemplateElementSourceType.Button">
             <summary>
             A button.
+            </summary>
+        </member>
+        <member name="T:Rewired.ControllerTemplateMap">
+            <summary>
+            Maps actions to specific Controller Template elements.
+            </summary>
+        </member>
+        <member name="M:Rewired.ControllerTemplateMap.ToXmlString">
+            <summary>
+            Exports the mapping information to XML.
+            </summary>
+            <returns>XML string</returns>
+        </member>
+        <member name="M:Rewired.ControllerTemplateMap.ToJsonString">
+            <summary>
+            Exports data to JSON string for saving.
+            </summary>
+            <returns>JSON string</returns>
+        </member>
+        <member name="M:Rewired.ControllerTemplateMap.ToControllerMap(Rewired.Controller)">
+            <summary>
+            Converts the Controller Template Map to a Controller Map.
+            </summary>
+            <param name="controller">The Controller for which to build the Controller Map.</param>
+            <returns>Returns the Controller Map.</returns>
+        </member>
+        <member name="M:Rewired.ControllerTemplateMap.FromControllerMap(Rewired.IControllerTemplate,Rewired.ControllerMap)">
+            <summary>
+            Creates a Controller Template Map from a Controller Map.
+            </summary>
+            <param name="controllerTemplate">The Controller Template for which to create the map.</param>
+            <param name="controllerMap">The Controller Map to convert.</param>
+            <returns>Returns a Controller Template Map created from a Controller Map.</returns>
+        </member>
+        <member name="M:Rewired.ControllerTemplateMap.FromXml(System.String)">
+            <summary>
+            Creates a Controller Template Map from XML.
+            </summary>
+            <param name="xmlString">The XML string.</param>
+            <returns>Returns the Controller Template Map. Returns null on failure.</returns>
+        </member>
+        <member name="M:Rewired.ControllerTemplateMap.FromJson(System.String)">
+            <summary>
+            Creates a Controller Template Map from JSON.
+            </summary>
+            <param name="jsonString">The JSON string.</param>
+            <returns>Returns the Controller Template Map. Returns null on failure.</returns>
+        </member>
+        <member name="P:Rewired.ControllerTemplateMap.id">
+            <summary>
+            The unique id of this Controller Template map.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateMap.templateTypeGuid">
+            <summary>
+            The Controller Template type GUID.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateMap.enabled">
+            <summary>
+            Is the controller map enabled? Disabled maps will never return input values for the ActionElementMaps contained within.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateMap.categoryId">
+            <summary>
+            The id of the Map Category of this controller map.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateMap.layoutId">
+            <summary>
+            The id of the Layout of this controller map.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerTemplateMap.ElementMaps">
+            <summary>
+            Gets all element maps in this Controller Template Map.
             </summary>
         </member>
         <member name="T:Rewired.Platforms.Custom.CustomInputSource">
@@ -7702,7 +7832,7 @@
         </member>
         <member name="T:Rewired.ActionElementMap">
             <summary>
-            Maps an action to a controller element.
+            Maps an Action to a Controller element.
             </summary>
         </member>
         <member name="M:Rewired.ActionElementMap.IsValidMap(Rewired.ActionElementMap)">
@@ -7792,7 +7922,7 @@
         </member>
         <member name="P:Rewired.ActionElementMap.axisContribution">
             <summary>
-            The axis contribution of the axis.
+            The contribution to the Action's final value when queried as an axis.
             </summary>
         </member>
         <member name="P:Rewired.ActionElementMap.keyboardKeyCode">
@@ -7928,6 +8058,26 @@
             Exports the CalibrationMap to an XML string.
             </summary>
             <returns>XML string</returns>
+        </member>
+        <member name="M:Rewired.CalibrationMap.ToJsonString">
+            <summary>
+            Exports the CalibrationMap to a JSON string.
+            </summary>
+            <returns>JSON string</returns>
+        </member>
+        <member name="M:Rewired.CalibrationMap.ImportXmlString(System.String)">
+            <summary>
+            Imports data from an XML string.
+            </summary>
+            <param name="xmlString">XML string data</param>
+            <returns>Success/Fail</returns>
+        </member>
+        <member name="M:Rewired.CalibrationMap.ImportJsonString(System.String)">
+            <summary>
+            Imports data from a JSON string.
+            </summary>
+            <param name="jsonString">JSON string data</param>
+            <returns>Success/Fail</returns>
         </member>
         <member name="P:Rewired.CalibrationMap.Axes">
             <summary>
@@ -9310,6 +9460,40 @@
             </summary>
             <returns>XML string</returns>
         </member>
+        <member name="M:Rewired.ControllerMap.ToJsonString">
+            <summary>
+            Exports data to JSON string for saving.
+            </summary>
+            <returns>JSON string</returns>
+        </member>
+        <member name="M:Rewired.ControllerMap.ToControllerTemplateMap(System.Guid)">
+            <summary>
+            Converts the Controller Map to a Controller Template Map.
+            </summary>
+            <param name="templateTypeGuid">Controller Template type GUID. The Controller that owns this Controller Map must implement this Controller Template type.</param>
+            <returns>Returns the Controller Template Map. Returns null on failure.</returns>
+        </member>
+        <member name="M:Rewired.ControllerMap.ToControllerTemplateMap``1">
+            <summary>
+            Converts the Controller Map to a Controller Template Map.
+            </summary>
+            <typeparam name="T">The Controller Template interface type. The Controller that owns this Controller Map must implement this Controller Template type.</typeparam>
+            <returns>Returns the Controller Template Map. Returns null on failure.</returns>
+        </member>
+        <member name="M:Rewired.ControllerMap.ToControllerTemplateMap(System.Type)">
+            <summary>
+            Converts the Controller Map to a Controller Template Map.
+            </summary>
+            <param name="templateInterfaceType">The Controller Template interface type. The Controller that owns this Controller Map must implement this Controller Template type.</param>
+            <returns>Returns the Controller Template Map. Returns null on failure.</returns>
+        </member>
+        <member name="M:Rewired.ControllerMap.ToControllerTemplateMap(Rewired.IControllerTemplate)">
+            <summary>
+            Converts the Controller Map to a Controller Template Map.
+            </summary>
+            <param name="controllerTemplate">The Controller Template for which to create the map.</param>
+            <returns>Returns the Controller Template Map.</returns>
+        </member>
         <member name="M:Rewired.ControllerMap.GetElementMaps_Append(System.Collections.Generic.List{Rewired.ActionElementMap},System.Boolean)">
             <summary>
             Gets all ActionElementMaps in this controller map and appends them to the end of the list.
@@ -9362,6 +9546,11 @@
         <member name="P:Rewired.ControllerMap.controllerId">
             <summary>
             The id of the controller this controller map applies to.
+            </summary>
+        </member>
+        <member name="P:Rewired.ControllerMap.controller">
+            <summary>
+            The controller this controller map applies to.
             </summary>
         </member>
         <member name="P:Rewired.ControllerMap.controllerType">
@@ -9913,9 +10102,22 @@
         </member>
         <member name="M:Rewired.InputBehavior.ImportXmlString(System.String)">
             <summary>
-            Imports data from XML string.
+            Imports data from an XML string.
             </summary>
             <param name="xmlString">XML string data</param>
+            <returns>Success/Fail</returns>
+        </member>
+        <member name="M:Rewired.InputBehavior.ToJsonString">
+            <summary>
+            Exports data to JSON string for saving.
+            </summary>
+            <returns>JSON string</returns>
+        </member>
+        <member name="M:Rewired.InputBehavior.ImportJsonString(System.String)">
+            <summary>
+            Imports data from a JSON string.
+            </summary>
+            <param name="jsonString">JSON string data</param>
             <returns>Success/Fail</returns>
         </member>
         <member name="M:Rewired.InputBehavior.ImportData(Rewired.InputBehavior)">
@@ -13002,7 +13204,7 @@
             <typeparam name="T">Map type</typeparam>
             <param name="controllerId">Controller id - Get this from the Controller.id property. For Keyboard and Mouse, just use 0.</param>
             <param name="xmlStrings">Xml save data</param>
-            <returns></returns>
+            <returns>Returns the number of Controller Maps added.</returns>
         </member>
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.AddMapsFromXml(Rewired.ControllerType,System.Int32,System.Collections.Generic.List{System.String})">
             <summary>
@@ -13011,7 +13213,43 @@
             <param name="controllerType">Controller type</param>
             <param name="controllerId">Controller id - Get this from the Controller.id property. For Keyboard and Mouse, just use 0.</param>
             <param name="xmlStrings">Xml save data</param>
-            <returns></returns>
+            <returns>>Returns the number of Controller Maps added.</returns>
+        </member>
+        <member name="M:Rewired.Player.ControllerHelper.MapHelper.AddMapFromJson``1(System.Int32,System.String)">
+            <summary>
+            Adds a controller map to the Player from Json save data.
+            </summary>
+            <typeparam name="T">Map type</typeparam>
+            <param name="controllerId">Controller id - Get this from the Controller.id property. For Keyboard and Mouse, just use 0.</param>
+            <param name="jsonString">Json save data</param>
+            <returns>Success/Failure</returns>
+        </member>
+        <member name="M:Rewired.Player.ControllerHelper.MapHelper.AddMapFromJson(Rewired.ControllerType,System.Int32,System.String)">
+            <summary>
+            Adds a controller map to the Player from Json save data.
+            </summary>
+            <param name="controllerType">Controller type</param>
+            <param name="controllerId">Controller id - Get this from the Controller.id property. For Keyboard and Mouse, just use 0.</param>
+            <param name="jsonString">Json save data</param>
+            <returns>Success/Failure</returns>
+        </member>
+        <member name="M:Rewired.Player.ControllerHelper.MapHelper.AddMapsFromJson``1(System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+            Adds multiple controller maps to the Player from Json save data.
+            </summary>
+            <typeparam name="T">Map type</typeparam>
+            <param name="controllerId">Controller id - Get this from the Controller.id property. For Keyboard and Mouse, just use 0.</param>
+            <param name="jsonStrings">Json save data</param>
+            <returns>Returns the number of Controller Maps added.</returns>
+        </member>
+        <member name="M:Rewired.Player.ControllerHelper.MapHelper.AddMapsFromJson(Rewired.ControllerType,System.Int32,System.Collections.Generic.List{System.String})">
+            <summary>
+            Adds multiple controller maps to the Player from Json save data.
+            </summary>
+            <param name="controllerType">Controller type</param>
+            <param name="controllerId">Controller id - Get this from the Controller.id property. For Keyboard and Mouse, just use 0.</param>
+            <param name="jsonStrings">Json save data</param>
+            <returns>>Returns the number of Controller Maps added.</returns>
         </member>
         <member name="M:Rewired.Player.ControllerHelper.MapHelper.AddEmptyMap``1(System.Int32,System.Int32,System.Int32)">
             <summary>
@@ -14272,24 +14510,41 @@
         <member name="T:Rewired.Player.ControllerHelper.PollingHelper">
             <summary>
             Provides access to all controller element polling related members.
+            This should only be used for controller mapping or other non-gameplay-related code.
+            The polling system is expensive and should not be used during gameplay.
             </summary>
         </member>
-        <member name="T:Rewired.Platforms.PS4.LoggedInUser">
+        <member name="T:Rewired.Platforms.PS4.Internal.LoggedInUser">
             <exclude></exclude>
         </member>
-        <member name="T:Rewired.Platforms.PS4.PS4GamepadExtension">
+        <member name="T:Rewired.Platforms.PS4.Internal.ControllerInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadControllerInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadDeviceClassExtendedInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadStickInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.Internal.PadTouchPadInformation">
+            <exclude></exclude>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.PS4ControllerExtension">
             <summary>
             Allows access to controller-specific functions.
             </summary>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Int32,System.Single)">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetVibration(System.Int32,System.Single)">
             <summary>
             Sets vibration level for a motor at a specified index.
             </summary>
             <param name="motorIndex">Motor index</param>
             <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Int32,System.Single,System.Single)">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetVibration(System.Int32,System.Single,System.Single)">
             <summary>
             Sets vibration level for a motor at a specified index with a timeout.
             </summary>
@@ -14297,7 +14552,7 @@
             <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
             <param name="duration">Length of time in seconds to activate the motor before it stops. [0 = Infinite]</param>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Int32,System.Single,System.Boolean)">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetVibration(System.Int32,System.Single,System.Boolean)">
             <summary>
             Sets vibration level for a motor at a specified index.
             </summary>
@@ -14305,7 +14560,7 @@
             <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
             <param name="stopOtherMotors">Stop other motors?</param>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Int32,System.Single,System.Single,System.Boolean)">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetVibration(System.Int32,System.Single,System.Single,System.Boolean)">
             <summary>
             Sets vibration level for a motor at a specified index with a timeout.
             </summary>
@@ -14314,100 +14569,26 @@
             <param name="duration">Length of time in seconds to activate the motor before it stops. [0 = Infinite]</param>
             <param name="stopOtherMotors">Stop other motors?</param>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetVibration(System.Int32)">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetVibration(System.Int32)">
             <summary>
             Gets vibration level for a motor at a specified index.
             </summary>
             <param name="motorIndex">Motor index</param>
             <returns>Motor level [float: 0.0 - 1.0]</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.StopVibration">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.StopVibration">
             <summary>
             Stops vibration on all motors.
             </summary>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType)">
-            <summary>
-            Gets vibration level for a specific motor.
-            </summary>
-            <param name="motor">Motor type</param>
-            <returns>Motor level [float: 0.0 - 1.0]</returns>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType,System.Single)">
-            <summary>
-            Sets vibration leves on an individual motor.
-            </summary>
-            <param name="motor">Motor type</param>
-            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType,System.Single,System.Boolean)">
-            <summary>
-            Sets vibration level on an individual motor.
-            </summary>
-            <param name="motor">Motor type</param>
-            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
-            <param name="stopOtherMotors">Stop other motors?</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType,System.Single,System.Single,System.Boolean)">
-            <summary>
-            Sets vibration level on an individual motor.
-            </summary>
-            <param name="motor">Motor type</param>
-            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
-            <param name="stopOtherMotors">Stop other motors?</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Single,System.Single)">
-            <summary>
-            Sets vibration level for left and right motors.
-            </summary>
-            <param name="leftMotorLevel">float: 0.0 - 1.0</param>
-            <param name="rightMotorLevel">float: 0.0 - 1.0</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Single,System.Single,System.Single,System.Single)">
-            <summary>
-            Sets vibration level for left and right motors.
-            </summary>
-            <param name="leftMotorLevel">float: 0.0 - 1.0</param>
-            <param name="rightMotorLevel">float: 0.0 - 1.0</param>
-            <param name="leftMotorDuration">Length of time in seconds to activate the left motor before it stops. [0 = Infinite]</param>
-            <param name="rightMotorDuration">Length of time in seconds to activate the right motor before it stops. [0 = Infinite]</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetLightColor(UnityEngine.Color)">
-            <summary>
-            Sets the light color. Alpha can be used to set intensity.
-            </summary>
-            <param name="color">Light color</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetLightColor(System.Single,System.Single,System.Single)">
-            <summary>
-            Sets the light color.
-            </summary>
-            <param name="red">Red channel [0.0 - 1.0]</param>
-            <param name="green">Green channel [0.0 - 1.0]</param>
-            <param name="blue">Blue channel [0.0 - 1.0]</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetLightColor(System.Single,System.Single,System.Single,System.Single)">
-            <summary>
-            Sets the light color.
-            </summary>
-            <param name="red">Red channel [0.0 - 1.0]</param>
-            <param name="green">Green channel [0.0 - 1.0]</param>
-            <param name="blue">Blue channel [0.0 - 1.0]</param>
-            <param name="intensity">Intensity [0.0 - 1.0]</param>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.ResetLight">
-            <summary>
-            Resets the light to the default settings.
-            </summary>
-        </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetAccelerometerValueRaw">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetAccelerometerValueRaw">
             <summary>
             Gets the raw value from the accelerometer as reported by the device.
             Note: Device coordinate system does not match Unity's.
             </summary>
             <returns>Raw accelerometer data</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetAccelerometerValue">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetAccelerometerValue">
             <summary>
             Gets the value from the accelerometer converted to Unity's coordinate system.
             The value returned could be thought of as a gravity vector and user acceleration combined.
@@ -14416,35 +14597,121 @@
             </summary>
             <returns>Accelerometer data</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetLastGyroscopeValueRaw">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetLastGyroscopeValueRaw">
             <summary>
             Gets the raw value from the gyroscope as reported by the device.
             Note: Device coordinate system does not match Unity's.
             </summary>
             <returns>Raw gyroscope data</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetLastGyroscopeValue">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetLastGyroscopeValue">
             <summary>
             Gets the value from the gyroscope converted to Unity's coordinate system.
             </summary>
             <returns>Gyroscope data</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetOrientationRaw">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetOrientationRaw">
             <summary>
             Gets the raw orientation as reported by the device.
             Note: Device coordinate system does not match Unity's.
             </summary>
             <returns>Raw orientation</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetOrientation">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.GetOrientation">
             <summary>
             Gets the orientation converted to Unity's coordinate system.
             </summary>
             <returns>Orientation</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.ResetOrientation">
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.ResetOrientation">
             <summary>
             Resets the orientation.
+            </summary>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetMotionSensorState(System.Boolean)">
+            <summary>
+            Sets the motion sensor state.
+            </summary>
+            <param name="enabled">The state</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetTiltCorrectionState(System.Boolean)">
+            <summary>
+            Sets the tilt correction state.
+            </summary>
+            <param name="enabled">The state</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetAngularVelocityDeadbandState(System.Boolean)">
+            <summary>
+            Sets the angular velocity deadband state.
+            </summary>
+            <param name="enabled">The state</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetLightColor(UnityEngine.Color)">
+            <summary>
+            Sets the light color. Alpha can be used to set intensity.
+            </summary>
+            <param name="color">Light color</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetLightColor(System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the light color.
+            </summary>
+            <param name="red">Red channel [0.0 - 1.0]</param>
+            <param name="green">Green channel [0.0 - 1.0]</param>
+            <param name="blue">Blue channel [0.0 - 1.0]</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.SetLightColor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the light color.
+            </summary>
+            <param name="red">Red channel [0.0 - 1.0]</param>
+            <param name="green">Green channel [0.0 - 1.0]</param>
+            <param name="blue">Blue channel [0.0 - 1.0]</param>
+            <param name="intensity">Intensity [0.0 - 1.0]</param>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4ControllerExtension.ResetLight">
+            <summary>
+            Resets the light to the default settings.
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.userStatusCode">
+            <summary>
+            Gets the PS4 user status code.
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.userIsPrimary">
+            <summary>
+            Is this PS4 user the primary user?
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.userId">
+            <summary>
+            Gets the PS4 user id.
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.userColor">
+            <summary>
+            Gets the PS4 user color.
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.userColorId">
+            <summary>
+            Gets the PS4 user color id.
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.userName">
+            <summary>
+            Gets the PS4 user name.
+            </summary>
+        </member>
+        <member name="P:Rewired.Platforms.PS4.PS4ControllerExtension.vibrationMotorCount">
+            <summary>
+            The number of vibration motors in this controller.
+            </summary>
+        </member>
+        <member name="T:Rewired.Platforms.PS4.PS4GamepadExtension">
+            <summary>
+            Allows access to gamepad-specific functions.
             </summary>
         </member>
         <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetTouchId(System.Int32)">
@@ -14499,53 +14766,52 @@
             <param name="touchId">The id of the touch</param>
             <returns>True/False</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetMotionSensorState(System.Boolean)">
+        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.GetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType)">
             <summary>
-            Sets the motion sensor state.
+            Gets vibration level for a specific motor.
             </summary>
-            <param name="enabled">The state</param>
+            <param name="motor">Motor type</param>
+            <returns>Motor level [float: 0.0 - 1.0]</returns>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetTiltCorrectionState(System.Boolean)">
+        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType,System.Single)">
             <summary>
-            Sets the tilt correction state.
+            Sets vibration leves on an individual motor.
             </summary>
-            <param name="enabled">The state</param>
+            <param name="motor">Motor type</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
         </member>
-        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetAngularVelocityDeadbandState(System.Boolean)">
+        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType,System.Single,System.Boolean)">
             <summary>
-            Sets the angular velocity deadband state.
+            Sets vibration level on an individual motor.
             </summary>
-            <param name="enabled">The state</param>
+            <param name="motor">Motor type</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="stopOtherMotors">Stop other motors?</param>
         </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.userStatusCode">
+        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(Rewired.Platforms.PS4.PS4GamepadMotorType,System.Single,System.Single,System.Boolean)">
             <summary>
-            Gets the PS4 user status code.
+            Sets vibration level on an individual motor.
             </summary>
+            <param name="motor">Motor type</param>
+            <param name="motorLevel">Motor level [float: 0.0 - 1.0]</param>
+            <param name="duration">Length of time in seconds to activate the motor before it stops. [0 = Infinite]</param>
+            <param name="stopOtherMotors">Stop other motors?</param>
         </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.userIsPrimary">
+        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Single,System.Single)">
             <summary>
-            Is this PS4 user the primary user?
+            Sets vibration level for left and right motors.
             </summary>
+            <param name="leftMotorLevel">float: 0.0 - 1.0</param>
+            <param name="rightMotorLevel">float: 0.0 - 1.0</param>
         </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.userId">
+        <member name="M:Rewired.Platforms.PS4.PS4GamepadExtension.SetVibration(System.Single,System.Single,System.Single,System.Single)">
             <summary>
-            Gets the PS4 user id.
+            Sets vibration level for left and right motors.
             </summary>
-        </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.userColor">
-            <summary>
-            Gets the PS4 user color.
-            </summary>
-        </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.userColorId">
-            <summary>
-            Gets the PS4 user color id.
-            </summary>
-        </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.userName">
-            <summary>
-            Gets the PS4 user name.
-            </summary>
+            <param name="leftMotorLevel">float: 0.0 - 1.0</param>
+            <param name="rightMotorLevel">float: 0.0 - 1.0</param>
+            <param name="leftMotorDuration">Length of time in seconds to activate the left motor before it stops. [0 = Infinite]</param>
+            <param name="rightMotorDuration">Length of time in seconds to activate the right motor before it stops. [0 = Infinite]</param>
         </member>
         <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.connectionType">
             <summary>
@@ -14553,11 +14819,6 @@
             This can be cast to UnityEngine.PS4Input.ConnectionType.
             </summary>
             <returns>Connection type as int</returns>
-        </member>
-        <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.vibrationMotorCount">
-            <summary>
-            The number of vibration motors in this controller.
-            </summary>
         </member>
         <member name="P:Rewired.Platforms.PS4.PS4GamepadExtension.maxTouches">
             <summary>
@@ -14612,6 +14873,11 @@
         <member name="F:Rewired.Platforms.PS4.PS4GamepadMotorType.WeakMotor">
             <summary>
             Right motor (weaker motor)
+            </summary>
+        </member>
+        <member name="M:Rewired.Platforms.PS4.PS4InputSource.Joystick.TryGetControllerTypeFromDeviceClass(System.Int32,Rewired.Platforms.PS4.PS4InputSource.Joystick.ControllerType@)">
+            <summary>
+            This exists because I do not know what the device classes are so I have to parse the string and guess.
             </summary>
         </member>
         <member name="T:Rewired.ReInput">
@@ -14811,6 +15077,12 @@
             Is the input system ready?
             </summary>
         </member>
+        <member name="P:Rewired.ReInput.id">
+            <summary>
+            The unique id of the Rewired instance. Every time Rewired is initialized, the id is incremented.
+            This is used for version checking on Rewred objects.
+            </summary>
+        </member>
         <member name="P:Rewired.ReInput.currentUnityFrame">
             <summary>
             The current Unity frame.
@@ -15003,6 +15275,18 @@
         <member name="T:Rewired.ReInput.ControllerHelper">
             <summary>
             Provides access to all controller-related members.
+            </summary>
+        </member>
+        <member name="F:Rewired.ReInput.ControllerHelper.polling">
+            <summary>
+            Provides access to controller element polling-related members.
+            This should only be used for controller mapping or other non-gameplay-related code.
+            The polling system is expensive and should not be used during gameplay.
+            </summary>
+        </member>
+        <member name="F:Rewired.ReInput.ControllerHelper.conflictChecking">
+            <summary>
+            Provides access to Controller Map conflict checking-related members.
             </summary>
         </member>
         <member name="M:Rewired.ReInput.ControllerHelper.GetController``1(System.Int32)">
@@ -15499,6 +15783,13 @@
             Get a collection of connected custom controllers.
             </summary>
             <returns>List of Custom Controllers</returns>
+        </member>
+        <member name="T:Rewired.ReInput.ControllerHelper.PollingHelper">
+            <summary>
+            Provides access to controller element polling-related members.
+            This should only be used for controller mapping or other non-gameplay-related code.
+            The polling system is expensive and should not be used during gameplay.
+            </summary>
         </member>
         <member name="M:Rewired.ReInput.ControllerHelper.PollingHelper.PollAllControllersForFirstElement">
             <summary>
@@ -16626,7 +16917,7 @@
         <member name="T:Rewired.Utils.Classes.Data.IndexedDictionary`2">
             <summary>
             A Dictionary that stores data sequentially and can be indexed.
-            Key lookups are O(n) where n is the length of the collection.
+            Key lookups are as fast as a Dictionary.
             Does not generate garbage on iOS.
             </summary>
             <typeparam name="TKey">Key type</typeparam>
@@ -16833,6 +17124,88 @@
             <param name="openSpaceEquals">Definition of an open space</param>
             <returns>Index where item added. -1 if not added.</returns>
         </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.Add``1(System.String,``0,Rewired.Utils.Classes.Data.SerializedObject.FieldOptions)">
+            <summary>
+            Adds or replaces a value.
+            </summary>
+            <typeparam name="T">The object type.</typeparam>
+            <param name="fieldName">The key.</param>
+            <param name="value">The value.</param>
+            <param name="options">Field options.</param>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.Add(System.Type,System.String,System.Object,Rewired.Utils.Classes.Data.SerializedObject.FieldOptions)">
+            <summary>
+            Adds or replaces a value.
+            </summary>
+            <param name="type">The object type.</param>
+            <param name="fieldName">The key.</param>
+            <param name="value">The value.</param>
+            <param name="options">Field options.</param>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.Add(System.String,System.Object)">
+            <summary>
+            Adds or replaces a value.
+            </summary>
+            <param name="fieldName">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.GetDataType(System.String)">
+            <summary>
+            Gets the data type of the original object.
+            If the object was deserialized without a known type, this will return null.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.GetOriginalValue(System.String)">
+            <summary>
+            Gets the original value. Does not do any conversion.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.GetOriginalValue(System.Int32)">
+            <summary>
+            Gets the original value. Does not do any conversion.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.GetOriginalValue``1(System.String)">
+            <summary>
+            Gets the original value. Does not do any conversion.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.GetOriginalValue``1(System.Int32)">
+            <summary>
+            Gets the original value. Does not do any conversion.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.TryGetDeserializedValue``1(System.String,``0@)">
+            <summary>
+            Gets the value and deserializes it into an object and performs conversion when necessary.
+            Every time this is called, if the object is converted from another type, a new instance of deserialized object will be created.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.TryGetDeserializedValue``1(System.Int32,``0@)">
+            <summary>
+            Gets the value and deserializes it into an object and performs conversion when necessary.
+            Every time this is called, if the object is converted from another type, a new instance of deserialized object will be created.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.TryGetDeserializedValueByRef``1(System.String,``0@)">
+            <summary>
+            Gets the value and deserializes it into an object and performs conversion when necessary.
+            Every time this is called, if the object is converted from another type, a new instance of deserialized object will be created.
+            If the object is not found or the deserialization fails, ref value will not be modified.
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Classes.Data.SerializedObject.TryGetDeserializedValueByRef``1(System.Int32,``0@)">
+            <summary>
+            Gets the value and deserializes it into an object and performs conversion when necessary.
+            Every time this is called, if the object is converted from another type, a new instance of deserialized object will be created.
+            If the object is not found or the deserialization fails, ref value will not be modified.
+            </summary>
+        </member>
+        <member name="P:Rewired.Utils.Classes.Data.SerializedObject.Item(System.Int32)">
+            <summary>
+            Returns the original values.
+            </summary>
+        </member>
         <member name="T:Rewired.Utils.Classes.Data.NativeBuffer">
             <summary>
             Creates a buffer in native memory.
@@ -17026,7 +17399,25 @@
             [Preserve]
             </summary>
         </member>
+        <member name="M:Rewired.Utils.Libraries.TinyJson.JsonParser.FromJson``1(System.String,System.Type)">
+            <exclude></exclude>
+            <summary>
+            Converts a json string to an object.
+            WARNING: Class types inside DLLs that you use this on MUST use the Rewired.Utils.Attributes.PreserveAttribute on the class if the default constructor
+            is never actively used in code or the default constructor will be stripped out by IL2CPP!
+            [Preserve]
+            </summary>
+        </member>
         <member name="M:Rewired.Utils.Libraries.TinyJson.JsonParser.FromJson(System.Type,System.String)">
+            <exclude></exclude>
+            <summary>
+            Converts a json string to an object.
+            WARNING: Class types inside DLLs that you use this on MUST use the Rewired.Utils.Attributes.PreserveAttribute on the class if the default constructor
+            is never actively used in code or the default constructor will be stripped out by IL2CPP!
+            [Preserve]
+            </summary>
+        </member>
+        <member name="M:Rewired.Utils.Libraries.TinyJson.JsonParser.FromJson(System.Type,System.String,System.Type)">
             <exclude></exclude>
             <summary>
             Converts a json string to an object.

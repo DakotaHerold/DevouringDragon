@@ -58,6 +58,10 @@
 #define SUPPORTS_UNITY_UI
 #endif
 
+#if (UNITY_PS4 && UNITY_2018_PLUS) || REWIRED_DEBUG_UNITY_PS4_2018_PLUS
+#define UNITY_PS4_2018_PLUS
+#endif
+
 // Copyright (c) 2015 Augie R. Maddox, Guavaman Enterprises. All rights reserved.
 #pragma warning disable 0219
 #pragma warning disable 0618
@@ -82,7 +86,7 @@ namespace Rewired.Utils {
             return null;
 #endif
         }
-        
+
         public string GetFocusedEditorWindowTitle() {
 #if UNITY_EDITOR
             UnityEditor.EditorWindow window = UnityEditor.EditorWindow.focusedWindow;
@@ -124,11 +128,11 @@ namespace Rewired.Utils {
 #else
         public bool LinuxInput_IsJoystickPreconfigured(string name) {
             return false;
-            
+
         }
 #endif
 
-// Xbox One Tools
+        // Xbox One Tools
 
 #if UNITY_XBOXONE
 
@@ -236,7 +240,7 @@ namespace Rewired.Utils {
 #if UNITY_PS4
 
         public Vector3 PS4Input_GetLastAcceleration(int id) {
-#if UNITY_2018_PLUS
+#if UNITY_PS4_2018_PLUS
             return UnityEngine.PS4.PS4Input.PadGetLastAcceleration(id);
 #else
             return UnityEngine.PS4.PS4Input.GetLastAcceleration(id);
@@ -244,7 +248,7 @@ namespace Rewired.Utils {
         }
 
         public Vector3 PS4Input_GetLastGyro(int id) {
-#if UNITY_2018_PLUS
+#if UNITY_PS4_2018_PLUS
             return UnityEngine.PS4.PS4Input.PadGetLastGyro(id);
 #else
             return UnityEngine.PS4.PS4Input.GetLastGyro(id);
@@ -252,7 +256,7 @@ namespace Rewired.Utils {
         }
 
         public Vector4 PS4Input_GetLastOrientation(int id) {
-#if UNITY_2018_PLUS
+#if UNITY_PS4_2018_PLUS
             return UnityEngine.PS4.PS4Input.PadGetLastOrientation(id);
 #else
             return UnityEngine.PS4.PS4Input.GetLastOrientation(id);
@@ -301,25 +305,54 @@ namespace Rewired.Utils {
             return UnityEngine.PS4.PS4Input.PadIsConnected(id);
         }
 
-        public object PS4Input_PadGetUsersDetails(int slot) {
-#if UNITY_2018_PLUS
+        public void PS4Input_GetUsersDetails(int slot, object loggedInUser) {
+            if(loggedInUser == null) throw new System.ArgumentNullException("loggedInUser");
+#if UNITY_PS4_2018_PLUS
             UnityEngine.PS4.PS4Input.LoggedInUser user = UnityEngine.PS4.PS4Input.GetUsersDetails(slot);
 #else
             UnityEngine.PS4.PS4Input.LoggedInUser user = UnityEngine.PS4.PS4Input.PadGetUsersDetails(slot);
 #endif
-            return new Rewired.Platforms.PS4.LoggedInUser() {
-                status = user.status,
-                primaryUser = user.primaryUser,
-                userId = user.userId,
-                color = user.color,
-                userName = user.userName,
-                padHandle = user.padHandle,
-                move0Handle = user.move0Handle,
-                move1Handle = user.move1Handle
-            };
+            Rewired.Platforms.PS4.Internal.LoggedInUser retUser = loggedInUser as Rewired.Platforms.PS4.Internal.LoggedInUser;
+            if(retUser == null) throw new System.ArgumentException("loggedInUser is not the correct type.");
+
+            retUser.status = user.status;
+            retUser.primaryUser = user.primaryUser;
+            retUser.userId = user.userId;
+            retUser.color = user.color;
+            retUser.userName = user.userName;
+            retUser.padHandle = user.padHandle;
+            retUser.move0Handle = user.move0Handle;
+            retUser.move1Handle = user.move1Handle;
+#if UNITY_PS4_2018_PLUS
+            retUser.aimHandle = user.aimHandle;
+#endif
         }
 
-		public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) {
+        public int PS4Input_GetDeviceClassForHandle(int handle) {
+#if UNITY_PS4_2018_PLUS
+            return (int)UnityEngine.PS4.PS4Input.GetDeviceClassForHandle(handle);
+#else
+            return -1;
+#endif
+        }
+
+        public string PS4Input_GetDeviceClassString(int intValue) {
+#if UNITY_PS4_2018_PLUS
+            return ((UnityEngine.PS4.PS4Input.DeviceClass)intValue).ToString();
+#else
+            return null;
+#endif
+        }
+
+        public int PS4Input_PadGetUsersHandles2(int maxControllers, int[] handles) {
+#if UNITY_PS4_2018_PLUS
+            return UnityEngine.PS4.PS4Input.PadGetUsersHandles2(maxControllers, handles);
+#else
+            return 0;
+#endif
+        }
+
+        public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) {
             return UnityEngine.PS4.PS4Input.GetLastMoveAcceleration(id, index);
         }
 
@@ -355,6 +388,85 @@ namespace Rewired.Utils {
             return UnityEngine.PS4.PS4Input.MoveGetControllerInputForTracking();
         }
 
+#if UNITY_PS4_2018_PLUS
+
+        private readonly UnityEngine.PS4.PS4Input.ControllerInformation _controllerInformation = new UnityEngine.PS4.PS4Input.ControllerInformation();
+
+        public void GetSpecialControllerInformation(int id, int padIndex, object controllerInformation) {
+            if(controllerInformation == null) throw new System.ArgumentNullException("controllerInformation");
+            Rewired.Platforms.PS4.Internal.ControllerInformation tControllerInformation = controllerInformation as Rewired.Platforms.PS4.Internal.ControllerInformation;
+            if(tControllerInformation == null) throw new System.ArgumentException("controllerInformation is not the correct type.");
+            UnityEngine.PS4.PS4Input.ControllerInformation c = _controllerInformation;
+            UnityEngine.PS4.PS4Input.GetSpecialControllerInformation(id, padIndex, ref c);
+            tControllerInformation.padControllerInformation.touchPadInfo.pixelDensity = c.padControllerInformation.touchPadInfo.pixelDensity;
+            tControllerInformation.padControllerInformation.touchPadInfo.resolutionX = c.padControllerInformation.touchPadInfo.resolutionX;
+            tControllerInformation.padControllerInformation.touchPadInfo.resolutionY = c.padControllerInformation.touchPadInfo.resolutionY;
+            tControllerInformation.padControllerInformation.stickInfo.deadZoneLeft = c.padControllerInformation.stickInfo.deadZoneLeft;
+            tControllerInformation.padControllerInformation.stickInfo.deadZoneRight = c.padControllerInformation.stickInfo.deadZoneRight;
+            tControllerInformation.padControllerInformation.connectionType = c.padControllerInformation.connectionType;
+            tControllerInformation.padControllerInformation.connectedCount = c.padControllerInformation.connectedCount;
+            tControllerInformation.padControllerInformation.connected = c.padControllerInformation.connected;
+            tControllerInformation.padControllerInformation.deviceClass = (int)c.padControllerInformation.deviceClass;
+            tControllerInformation.padDeviceClassExtendedInformation.deviceClass = (int)c.padDeviceClassExtendedInformation.deviceClass;
+            tControllerInformation.padDeviceClassExtendedInformation.capability = c.padDeviceClassExtendedInformation.capability;
+            tControllerInformation.padDeviceClassExtendedInformation.quantityOfSelectorSwitch = c.padDeviceClassExtendedInformation.quantityOfSelectorSwitch;
+            tControllerInformation.padDeviceClassExtendedInformation.maxPhysicalWheelAngle = c.padDeviceClassExtendedInformation.maxPhysicalWheelAngle;
+        }
+
+        public Vector3 PS4Input_SpecialGetLastAcceleration(int id) {
+            return UnityEngine.PS4.PS4Input.SpecialGetLastAcceleration(id);
+        }
+
+        public Vector3 PS4Input_SpecialGetLastGyro(int id) {
+            return UnityEngine.PS4.PS4Input.SpecialGetLastGyro(id);
+        }
+
+        public Vector4 PS4Input_SpecialGetLastOrientation(int id) {
+            return UnityEngine.PS4.PS4Input.SpecialGetLastOrientation(id);
+        }
+
+        public int PS4Input_SpecialGetUsersHandles(int maxNumberControllers, int[] handles) {
+            return UnityEngine.PS4.PS4Input.SpecialGetUsersHandles(maxNumberControllers, handles);
+        }
+
+        public int PS4Input_SpecialGetUsersHandles2(int maxNumberControllers, int[] handles) {
+            return UnityEngine.PS4.PS4Input.SpecialGetUsersHandles2(maxNumberControllers, handles);
+        }
+
+        public bool PS4Input_SpecialIsConnected(int id) {
+            return UnityEngine.PS4.PS4Input.SpecialIsConnected(id);
+        }
+
+        public void PS4Input_SpecialResetLightSphere(int id) {
+            UnityEngine.PS4.PS4Input.SpecialResetLightSphere(id);
+        }
+
+        public void PS4Input_SpecialResetOrientation(int id) {
+            UnityEngine.PS4.PS4Input.SpecialResetOrientation(id);
+        }
+
+        public void PS4Input_SpecialSetAngularVelocityDeadbandState(int id, bool bEnable) {
+            UnityEngine.PS4.PS4Input.SpecialSetAngularVelocityDeadbandState(id, bEnable);
+        }
+
+        public void PS4Input_SpecialSetLightSphere(int id, int red, int green, int blue) {
+            UnityEngine.PS4.PS4Input.SpecialSetLightSphere(id, red, green, blue);
+        }
+
+        public void PS4Input_SpecialSetMotionSensorState(int id, bool bEnable) {
+            UnityEngine.PS4.PS4Input.SpecialSetMotionSensorState(id, bEnable);
+        }
+
+        public void PS4Input_SpecialSetTiltCorrectionState(int id, bool bEnable) {
+            UnityEngine.PS4.PS4Input.SpecialSetTiltCorrectionState(id,  bEnable);
+        }
+
+        public void PS4Input_SpecialSetVibration(int id, int largeMotor, int smallMotor) {
+            UnityEngine.PS4.PS4Input.SpecialSetVibration(id, largeMotor, smallMotor);
+        }
+
+#endif
+
 #else
         public Vector3 PS4Input_GetLastAcceleration(int id) { return Vector3.zero; }
 
@@ -382,7 +494,13 @@ namespace Rewired.Utils {
 
         public bool PS4Input_PadIsConnected(int id) { return false; }
 
-        public object PS4Input_PadGetUsersDetails(int slot) { return null; }
+        public void PS4Input_GetUsersDetails(int slot, object loggedInUser) { }
+
+        public int PS4Input_GetDeviceClassForHandle(int handle) { return -1; }
+
+        public string PS4Input_GetDeviceClassString(int intValue) { return null; }
+
+        public int PS4Input_PadGetUsersHandles2(int maxControllers, int[] handles) { return 0; }
 
         public Vector3 PS4Input_GetLastMoveAcceleration(int id, int index) { return Vector3.zero; }
 
@@ -401,6 +519,39 @@ namespace Rewired.Utils {
         public int PS4Input_MoveGetUsersMoveHandles(int maxNumberControllers) { return 0; }
 
         public System.IntPtr PS4Input_MoveGetControllerInputForTracking() { return System.IntPtr.Zero; }
+
+#if UNITY_2018_PLUS
+
+        public void GetSpecialControllerInformation(int id, int padIndex, object controllerInformation) { }
+
+        public Vector3 PS4Input_SpecialGetLastAcceleration(int id) { return Vector3.zero; }
+
+        public Vector3 PS4Input_SpecialGetLastGyro(int id) { return Vector3.zero; }
+
+        public Vector4 PS4Input_SpecialGetLastOrientation(int id) { return Vector4.zero; }
+
+        public int PS4Input_SpecialGetUsersHandles(int maxNumberControllers, int[] handles) { return 0; }
+
+        public int PS4Input_SpecialGetUsersHandles2(int maxNumberControllers, int[] handles) { return 0; }
+
+        public bool PS4Input_SpecialIsConnected(int id) { return false; }
+
+        public void PS4Input_SpecialResetLightSphere(int id) { }
+
+        public void PS4Input_SpecialResetOrientation(int id) { }
+
+        public void PS4Input_SpecialSetAngularVelocityDeadbandState(int id, bool bEnable) { }
+
+        public void PS4Input_SpecialSetLightSphere(int id, int red, int green, int blue) { }
+
+        public void PS4Input_SpecialSetMotionSensorState(int id, bool bEnable) { }
+
+        public void PS4Input_SpecialSetTiltCorrectionState(int id, bool bEnable) { }
+
+        public void PS4Input_SpecialSetVibration(int id, int largeMotor, int smallMotor) { }
+
+#endif
+
 #endif
 
 #if UNITY_ANDROID && !UNITY_EDITOR
@@ -462,7 +613,7 @@ namespace Rewired.Utils {
             return -1;
         }
 #endif
-#region Unity UI
+        #region Unity UI
 
 
 #if SUPPORTS_UNITY_UI
@@ -486,20 +637,20 @@ namespace Rewired.Utils {
         public void UnityUI_Graphic_SetRaycastTarget(object graphic, bool value) { }
 #endif
 
-#endregion
-        
-#region Touch
-        
+        #endregion
+
+        #region Touch
+
         public bool UnityInput_IsTouchPressureSupported {
-          get {
+            get {
 #if UNITY_5_3_PLUS
               return UnityEngine.Input.touchPressureSupported;
 #else
-              return false;
+                return false;
 #endif
-          }
+            }
         }
-        
+
         public float UnityInput_GetTouchPressure(ref UnityEngine.Touch touch) {
 #if UNITY_5_3_PLUS
             return touch.pressure;
@@ -509,7 +660,7 @@ namespace Rewired.Utils {
                 ? 1.0f : 0.0f;
 #endif
         }
-        
+
         public float UnityInput_GetTouchMaximumPossiblePressure(ref UnityEngine.Touch touch) {
 #if UNITY_5_3_PLUS
             return touch.maximumPossiblePressure;
@@ -518,9 +669,9 @@ namespace Rewired.Utils {
 #endif
         }
 
-#endregion
+        #endregion
 
-#region Controller Templates
+        #region Controller Templates
 
         public IControllerTemplate CreateControllerTemplate(System.Guid typeGuid, object payload) {
             return Rewired.Internal.ControllerTemplateFactory.Create(typeGuid, payload);
@@ -534,6 +685,6 @@ namespace Rewired.Utils {
             return Rewired.Internal.ControllerTemplateFactory.templateInterfaceTypes;
         }
 
-#endregion
+        #endregion
     }
 }
