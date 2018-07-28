@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Edible : MonoBehaviour {
-    public Collider bounds;
     public int points;
 	
 	// Update is called once per frame
@@ -17,9 +16,9 @@ public class Edible : MonoBehaviour {
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        EdibleDestroyed();
+        EdibleDestroyed(true);
     }
 
     public void EdibleDestroyed(bool byPlayer = true)
