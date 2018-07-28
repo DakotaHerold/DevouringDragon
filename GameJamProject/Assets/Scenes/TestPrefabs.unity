@@ -275,18 +275,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114588484100120478, guid: 84b2fa07eb037cb4c8ecbe6addd02ef9,
-        type: 2}
-      propertyPath: edibles.Array.data[0]
-      value: 
-      objectReference: {fileID: 1374647196692312, guid: 4626bc5d190d6914bb88826c9679d557,
-        type: 2}
-    - target: {fileID: 114588484100120478, guid: 84b2fa07eb037cb4c8ecbe6addd02ef9,
-        type: 2}
-      propertyPath: edibles.Array.data[1]
-      value: 
-      objectReference: {fileID: 1728929251923756, guid: b48ea03f580fc7644adb1916cc12bca2,
-        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 84b2fa07eb037cb4c8ecbe6addd02ef9, type: 2}
   m_IsPrefabParent: 0
@@ -331,7 +319,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1244370703796952, guid: 520efd206d8a93f43b88ded1f4bf45c5, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 520efd206d8a93f43b88ded1f4bf45c5, type: 2}

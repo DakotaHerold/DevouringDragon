@@ -69,7 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bounds: {fileID: 0}
-  points: 0
+  points: 100
 --- !u!212 &212399135607559326
 SpriteRenderer:
   m_ObjectHideFlags: 1

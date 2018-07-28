@@ -18,6 +18,7 @@ public class GameHandler : Singleton<GameHandler>
     public float spawnDelay; // Current time between spawns
     public float spawnInterval; // Use this to determine when we up the spawn speed
     public float forcedTowerDelay; // Time before it can drop a tower again...
+    public float widthFudgeFactor; // Used to vary the x within the lanes...
 
     public int score;
 
@@ -34,21 +35,22 @@ public class GameHandler : Singleton<GameHandler>
     private void FixedUpdate()
     {
         float curTime = Time.time;
+        float fudgeX = (Random.value * (widthFudgeFactor * 2)) - (widthFudgeFactor);
         if (curTime > nextSpawnTime1)
         {
             lastSpawnTime1 = curTime;
             nextSpawnTime1 = lastSpawnTime1 + (spawnDelay * (1f + Random.value));
             int index = Mathf.RoundToInt(Random.value);
-            if (index > 0)
+            if ((index > 0) || (curTime < lastTowerSpawn + forcedTowerDelay))
             {
                 index = Mathf.RoundToInt(Random.value * (edibles.Count-1));
-                Instantiate(edibles[index], lane1.position, Quaternion.identity);
+                Instantiate(edibles[index], new Vector3(lane1.position.x + fudgeX,lane1.position.y), Quaternion.identity);
             }
-            else if (curTime > lastTowerSpawn + forcedTowerDelay)
+            else
             {
                 lastTowerSpawn = curTime;
                 index = Mathf.RoundToInt(Random.value * (towers.Count-1));
-                Instantiate(towers[index], lane1.position, Quaternion.identity);
+                Instantiate(towers[index], new Vector3(lane1.position.x + fudgeX, lane1.position.y), Quaternion.identity);
             }
         }
         if (curTime > nextSpawnTime2)
@@ -56,16 +58,16 @@ public class GameHandler : Singleton<GameHandler>
             lastSpawnTime2 = curTime;
             nextSpawnTime2 = lastSpawnTime2 + (spawnDelay * (1f + Random.value));
             int index = Mathf.RoundToInt(Random.value);
-            if (index > 0)
+            if ((index > 0) || (curTime < lastTowerSpawn + forcedTowerDelay))
             {
                 index = Mathf.RoundToInt(Random.value * (edibles.Count-1));
-                Instantiate(edibles[index], lane2.position, Quaternion.identity);
+                Instantiate(edibles[index], new Vector3(lane2.position.x + fudgeX, lane2.position.y), Quaternion.identity);
             }
-            else if (curTime > lastTowerSpawn + forcedTowerDelay)
+            else
             {
                 lastTowerSpawn = curTime;
                 index = Mathf.RoundToInt(Random.value * (towers.Count-1));
-                Instantiate(towers[index], lane2.position, Quaternion.identity);
+                Instantiate(towers[index], new Vector3(lane2.position.x + fudgeX, lane2.position.y), Quaternion.identity);
             }
         }
         if (curTime  > nextSpawnTime3)
@@ -73,16 +75,16 @@ public class GameHandler : Singleton<GameHandler>
             lastSpawnTime3 = curTime;
             nextSpawnTime3 = lastSpawnTime3 + (spawnDelay * (1f + Random.value));
             int index = Mathf.RoundToInt(Random.value);
-            if (index > 0)
+            if ((index > 0) || (curTime < lastTowerSpawn + forcedTowerDelay))
             {
                 index = Mathf.RoundToInt(Random.value * (edibles.Count-1));
-                Instantiate(edibles[index], lane3.position, Quaternion.identity);
+                Instantiate(edibles[index], new Vector3(lane3.position.x + fudgeX, lane3.position.y), Quaternion.identity);
             }
-            else if (curTime > lastTowerSpawn + forcedTowerDelay)
+            else
             {
                 lastTowerSpawn = curTime;
                 index = Mathf.RoundToInt(Random.value * (towers.Count-1));
-                Instantiate(towers[index], lane3.position, Quaternion.identity);
+                Instantiate(towers[index], new Vector3(lane3.position.x + fudgeX, lane3.position.y), Quaternion.identity);
             }
         }
         if ((curTime - lastSpawnInterval) > spawnInterval)

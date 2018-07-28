@@ -450,12 +450,13 @@ MonoBehaviour:
   lane2: {fileID: 4795256564303254}
   lane3: {fileID: 4174549244290462}
   edibles:
-  - {fileID: 1384164404578336, guid: 4626bc5d190d6914bb88826c9679d557, type: 2}
-  - {fileID: 1927050555464948, guid: b48ea03f580fc7644adb1916cc12bca2, type: 2}
+  - {fileID: 1374647196692312, guid: 4626bc5d190d6914bb88826c9679d557, type: 2}
+  - {fileID: 1728929251923756, guid: b48ea03f580fc7644adb1916cc12bca2, type: 2}
   towers:
   - {fileID: 1873364329652540, guid: 4ad0188ec75673242977bb72be1e3dc6, type: 2}
   playerSpeed: 5
-  spawnDelay: 5
+  spawnDelay: 2
   spawnInterval: 20
-  forcedTowerDelay: 3
+  forcedTowerDelay: 0.5
+  widthFudgeFactor: 0.25
   score: 0
