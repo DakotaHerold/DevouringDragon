@@ -54,7 +54,7 @@ public class InputHandler : Singleton<InputHandler>
         //}
     }
 
-    bool SwervedPressed()
+    public bool SwervedPressed()
     {
         return players[0].Swerve; 
     }
