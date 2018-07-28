@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4522561637258494}
   - component: {fileID: 212480654957679490}
   - component: {fileID: 114953937195390446}
-  - component: {fileID: 65682183120843854}
+  - component: {fileID: 58006440885772424}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Untagged
@@ -36,24 +36,27 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244370703796952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -3, z: 0}
+  m_LocalPosition: {x: 4.94, y: 0.01, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &65682183120843854
-BoxCollider:
+--- !u!58 &58006440885772424
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1244370703796952}
+  m_Enabled: 1
+  m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 5.1199994, y: 5.1199994, z: 0.19999999}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3
 --- !u!114 &114953937195390446
 MonoBehaviour:
   m_ObjectHideFlags: 1

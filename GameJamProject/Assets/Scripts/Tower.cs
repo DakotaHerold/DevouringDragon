@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    public Collider bounds;
+    //public Collider bounds;
+    private Collider2D bounds; 
     public int points;
 
     public delegate void EventAction();
-    public static event EventAction OnTowerEntered;
-    public static event EventAction OnTowerDestroyed;
+    //public static event EventAction OnTowerEntered;
+    //public static event EventAction OnTowerDestroyed;
 
     // Use this for initialization
     void Start () {
-		
+        bounds = GetComponent<Collider2D>(); 
 	}
 	
 	// Update is called once per frame
@@ -23,14 +24,14 @@ public class Tower : MonoBehaviour
         if (this.gameObject.transform.position.y < -20) TowerDestroyed();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         TowerSpaceEntered();
     }
 
     public void TowerSpaceEntered()
     {
-        OnTowerEntered();
+        Debug.Log("Entered!"); 
     }
 
     public void TowerDestroyed()
@@ -38,6 +39,6 @@ public class Tower : MonoBehaviour
         // Here we want to eat the edible
         GameHandler.Instance.score += points;
         Destroy(gameObject, 0.2f);
-        OnTowerDestroyed();
+        //OnTowerDestroyed();
     }
 }
