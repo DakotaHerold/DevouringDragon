@@ -17,15 +17,15 @@ public class Arrow : MonoBehaviour {
 
             Vector3 newPos = transform.position + velocity;
             transform.position = newPos;
-            transform.up = direction; 
+            transform.up = direction;
 
-            //if (transform.position.x < 2000 || transform.position.x > 2000)
-            //{
-            //    Destroy(gameObject);
-            //}
+            if (transform.position.x < -200 || transform.position.x > 200)
+            {
+                Destroy(gameObject);
+            }
         }
 
-        
+
 
     }
 

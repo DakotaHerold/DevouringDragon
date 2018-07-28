@@ -50,6 +50,8 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public bool hitWall = false; 
+
     // Use this for initialization
     void Start () {
         coolDownTimer = coolDownBase;
@@ -62,6 +64,9 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+        //if (hitWall)
+        //    return; 
 
         Vector3 newPos = transform.position;
 
@@ -182,5 +187,18 @@ public class PlayerController : MonoBehaviour {
     float GetXPos()
     {
         return transform.position.x; 
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        isRight = !isRight;
+        hitWall = true;
+        StartCoroutine(ResetWallHit()); 
+    }
+
+    IEnumerator ResetWallHit()
+    {
+        yield return new WaitForSeconds(0.25f);
+        hitWall = false; 
     }
 }
