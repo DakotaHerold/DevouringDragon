@@ -14,9 +14,9 @@ public class Ground : MonoBehaviour
         {
             float dist = GameHandler.Instance.playerSpeed * Time.deltaTime;
             GameHandler.Instance.DistanceTravelled += dist;
-            scroll1.position = new Vector3(scroll1.position.x, scroll1.position.y - dist + ((scroll1.position.y - dist < -30f) ? 60f : 0f));
-            scroll2.position = new Vector3(scroll2.position.x, scroll2.position.y - dist + ((scroll2.position.y - dist < -30f) ? 60f : 0f));
-            scroll3.position = new Vector3(scroll3.position.x, scroll3.position.y - dist + ((scroll3.position.y - dist < -30f) ? 60f : 0f));
+            scroll1.position = new Vector3(scroll1.position.x, scroll1.position.y - dist + ((scroll1.position.y - dist < -30f) ? 64.5f : 0f));
+            scroll2.position = new Vector3(scroll2.position.x, scroll2.position.y - dist + ((scroll2.position.y - dist < -30f) ? 64.5f : 0f));
+            scroll3.position = new Vector3(scroll3.position.x, scroll3.position.y - dist + ((scroll3.position.y - dist < -30f) ? 64.5f : 0f));
         }
 	}
 }
