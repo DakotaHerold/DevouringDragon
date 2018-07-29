@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour {
     private float ySpeed = 1.0f;
     private float maxYSpeed = 10.0f;
     private float minYSpeed = 5.0f;
+    private float maxXPos = 8f;
+    private float minXPos = -8f;
 
     private Vector2 minScale;
     private Vector2 baseScale;
@@ -105,6 +107,7 @@ public class PlayerController : MonoBehaviour {
                 newPos.x -= currentDriftSpeed * Time.deltaTime;
             }
         }
+        newPos.x = Mathf.Clamp(newPos.x, minXPos, maxXPos);
 
         float vMovement = InputHandler.Instance.GetVerticalMovement(); 
         if (vMovement != 0)
