@@ -87,6 +87,11 @@ public class GameHandler : Singleton<GameHandler>
         {
             Destroy(go);
         }
+        GameObject[] arrows = GameObject.FindGameObjectsWithTag("Arrow");
+        foreach (GameObject go in arrows)
+        {
+            Destroy(go);
+        }
     }
 
     public void PauseGame()
