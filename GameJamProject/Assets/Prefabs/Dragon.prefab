@@ -111,6 +111,8 @@ MonoBehaviour:
   shrinkOffset: 0.1
   growthOffset: 0.1
   hitWall: 0
+  minSound: 8
+  maxSound: 12
 --- !u!212 &212480654957679490
 SpriteRenderer:
   m_ObjectHideFlags: 1
