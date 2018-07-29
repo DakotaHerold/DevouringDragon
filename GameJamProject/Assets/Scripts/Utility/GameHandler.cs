@@ -35,6 +35,7 @@ public class GameHandler : Singleton<GameHandler>
     private float nextSpawnTime3 = 0f;
     //private float randOffset = 1f;
     private float lastSpawnInterval = 0f;
+    private float nextSpawnInterval = 0f;
     private float lastTowerSpawn = 0;
     private float pausedPlayerSpeed = -1f;
 
@@ -87,6 +88,14 @@ public class GameHandler : Singleton<GameHandler>
     {
         float curTime = Time.time;
         float fudgeX = (Random.value * (widthFudgeFactor * 2)) - (widthFudgeFactor);
+        if (GameHandler.Instance.playerSpeed == 0)
+        {
+            nextSpawnTime1 += Time.deltaTime;
+            nextSpawnTime2 += Time.deltaTime;
+            nextSpawnTime3 += Time.deltaTime;
+            nextSpawnInterval += Time.deltaTime;
+            return;
+        }
         if (curTime > nextSpawnTime1)
         {
             lastSpawnTime1 = curTime;
@@ -138,9 +147,10 @@ public class GameHandler : Singleton<GameHandler>
                 Instantiate(towers[index], new Vector3(lane3.position.x + fudgeX, lane3.position.y), Quaternion.identity);
             }
         }
-        if ((curTime - lastSpawnInterval) > spawnInterval)
+        if (curTime > nextSpawnInterval)
         {
             lastSpawnInterval = curTime;
+            nextSpawnInterval = lastSpawnInterval + spawnInterval;
             playerSpeed += 1f;
             spawnDelay = spawnDelay * 0.75f;
         }
