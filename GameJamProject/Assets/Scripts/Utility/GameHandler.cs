@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameHandler : Singleton<GameHandler>
 {
@@ -18,6 +19,7 @@ public class GameHandler : Singleton<GameHandler>
     public StartOptions startOptions;
     public AudioSource fxPlayer;
     public List<AudioClip> clipList;
+    public Text scoreBox;
 
     public enum AudioClipIndex
     {
@@ -181,5 +183,6 @@ public class GameHandler : Singleton<GameHandler>
             playerSpeed += 1f;
             spawnDelay = spawnDelay * 0.75f;
         }
+        if(scoreBox != null) scoreBox.text = "Score: " + score;
     }
 }
