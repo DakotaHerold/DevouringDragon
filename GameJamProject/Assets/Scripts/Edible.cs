@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Edible : MonoBehaviour {
     public int points;
+    public List<AudioSource> soundList;
 	
 	// Update is called once per frame
 	void Update ()
@@ -19,6 +20,12 @@ public class Edible : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision)
     {
         EdibleDestroyed(true);
+        if(soundList.Count > 0)
+        {
+            int index = Mathf.RoundToInt(Random.value * (soundList.Count - 1));
+            soundList[index].volume = GameHandler.Instance.menuController.GetFXVolume();
+            soundList[index].Play();
+        }
     }
 
     public void EdibleDestroyed(bool byPlayer = true)
