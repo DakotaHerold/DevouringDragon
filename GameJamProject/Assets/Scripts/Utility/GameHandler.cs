@@ -69,7 +69,7 @@ public class GameHandler : Singleton<GameHandler>
     {
         gameOver = false; 
         player = FindObjectOfType<PlayerController>();
-        player.gameObject.transform.localScale = new Vector3(0, 0, 0);
+        player.gameObject.transform.localScale = new Vector3(1, 1, 1);
 
         distanceTraveled = 0f;
         score = 0;
