@@ -61,15 +61,20 @@ public class GameHandler : Singleton<GameHandler>
     private float lastTowerSpawn = 0;
     private float pausedPlayerSpeed = -1f;
     private float timesGrown = 0;
+    private float basePlayerSpeed;
 
     private PlayerController player; 
 
     public void NewGame()
     {
         gameOver = false; 
-        player = FindObjectOfType<PlayerController>(); 
+        player = FindObjectOfType<PlayerController>();
+        player.gameObject.transform.localScale = new Vector3(0, 0, 0);
 
         distanceTraveled = 0f;
+        score = 0;
+        playerSpeed = basePlayerSpeed;
+        timesGrown = 0f;
 
         // Clean out old prefabs...
         GameObject[] edibles = GameObject.FindGameObjectsWithTag("Edible");
@@ -109,6 +114,7 @@ public class GameHandler : Singleton<GameHandler>
 
     private void Start()
     {
+        basePlayerSpeed = playerSpeed;
         NewGame();
         PauseGame();
     }
