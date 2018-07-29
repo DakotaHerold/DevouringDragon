@@ -106,25 +106,44 @@ public class ShowPanels : MonoBehaviour {
 
 	}
 
+    public void ShowScores()
+    {
+        highScorePanel.SetActive(true);
+        optionsTint.SetActive(true);
+        menuPanel.SetActive(false);
+        SetSelection(highScorePanel);
+    }
+
+    public void HideScores()
+    {
+        highScorePanel.SetActive(false);
+        optionsTint.SetActive(false);
+        menuPanel.SetActive(true); 
+    }
+
     public void ShowGameOverPanel()
     {
         Dictionary<string, int> scores = GetScores();
 
+
         string highestScoreString = (scores.FirstOrDefault(x => x.Value == scores.Values.Max()).Key);
         int highestScore = 0;
-        int.TryParse(highestScoreString, out highestScore); 
+        int.TryParse(highestScoreString, out highestScore);
 
         if (scores.Count < 3 || GameHandler.Instance.score > highestScore)
         {
             gameOverPanel.SetActive(true);
             optionsTint.SetActive(true);
+            //highScorePanel.SetActive(true); 
             menuPanel.SetActive(false);
             //SetSelection(gameOverPanel);
         }
         else
         {
-            ShowMenu(); 
+            ShowMenu();
         }
+        
+        
       
     }
 
@@ -149,11 +168,16 @@ public class ShowPanels : MonoBehaviour {
     public Dictionary<string, int> GetScores()
     {
         Dictionary<string, int> scores = new Dictionary<string, int>();
+        Dictionary<string, string> dict = new Dictionary<string, string>(); 
 
         string text = PlayerPrefs.GetString("Scores");
-        Dictionary<string, string> dict = text.Split('|')
-      .Select(s => s.Split(','))
-      .ToDictionary(key => key[0].Trim(), value => value[1].Trim());
+        if(text.Length > 0)
+        {
+            dict = text.Split('|')
+          .Select(s => s.Split(','))
+          .ToDictionary(key => key[0].Trim(), value => value[1].Trim());
+        }
+        
 
         foreach (KeyValuePair<string, string> entry in dict)
         {
