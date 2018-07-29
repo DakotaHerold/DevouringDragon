@@ -173,7 +173,8 @@ public class PlayerController : MonoBehaviour {
 
         if(dragonScale.x <= minScale.x)
         {
-            Debug.Log("Game over!"); 
+            Debug.Log("Game over!");
+            GameHandler.Instance.GameOver(); 
         }
 
         
