@@ -175,7 +175,7 @@ public class ShowPanels : MonoBehaviour {
         {
             dict = text.Split('|')
           .Select(s => s.Split(','))
-          .ToDictionary(key => key[0].Trim(), value => value[1].Trim());
+          .ToDictionary(key => key[0].Trim(), value => value[0].Trim());
         }
         
 

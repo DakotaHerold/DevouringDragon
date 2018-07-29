@@ -55,6 +55,9 @@ public class Tower : MonoBehaviour
 
     public void TowerSpaceEntered(PlayerController player)
     {
+        if (GameHandler.Instance.gameOver)
+            return; 
+
         if(!coolingDown)
         {
             coolingDown = true;

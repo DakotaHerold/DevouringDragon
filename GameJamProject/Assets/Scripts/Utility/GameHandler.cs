@@ -20,6 +20,7 @@ public class GameHandler : Singleton<GameHandler>
     public AudioSource fxPlayer;
     public List<AudioClip> clipList;
     public Text scoreBox;
+    public bool gameOver;
 
     public enum AudioClipIndex
     {
@@ -65,6 +66,7 @@ public class GameHandler : Singleton<GameHandler>
 
     public void NewGame()
     {
+        gameOver = false; 
         player = FindObjectOfType<PlayerController>(); 
 
         distanceTraveled = 0f;
@@ -99,6 +101,7 @@ public class GameHandler : Singleton<GameHandler>
 
     public void GameOver()
     {
+        gameOver = true; 
         PauseGame();
         startOptions.ReturnToMenu(); 
         menuController.ShowGameOverPanel(); 
