@@ -25,7 +25,8 @@ public class ShowPanels : MonoBehaviour {
     private MenuObject activePanelMenuObject;
     private EventSystem eventSystem;
 
-
+    [Space(10)]
+    public Text highScoresText; 
 
     private void SetSelection(GameObject panelToSetSelected)
     {
@@ -151,6 +152,11 @@ public class ShowPanels : MonoBehaviour {
     {
         // TODO store score
         SaveScore(inField.text, GameHandler.Instance.score);
+        // Write high scores to panel text 
+        string prefsStr = PlayerPrefs.GetString("Scores").Replace('|', '\n');
+        highScoresText.text = prefsStr; 
+
+
         gameOverPanel.SetActive(false); 
         optionsTint.SetActive(false);
         menuPanel.SetActive(true);
