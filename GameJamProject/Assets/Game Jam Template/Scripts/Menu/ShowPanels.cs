@@ -108,22 +108,42 @@ public class ShowPanels : MonoBehaviour {
 
     public void ShowGameOverPanel()
     {
-        Dictionary<string, int> scores = GetScores(); 
+        Dictionary<string, int> scores = GetScores();
 
-        //if(scores.Count < 3 || GameHandler.Instance.score > )
-        gameOverPanel.SetActive(true);
-        optionsTint.SetActive(true);
-        menuPanel.SetActive(false);
-        SetSelection(gameOverPanel);
+        string highestScoreString = (scores.FirstOrDefault(x => x.Value == scores.Values.Max()).Key);
+        int highestScore = 0;
+        int.TryParse(highestScoreString, out highestScore); 
+
+        if (scores.Count < 3 || GameHandler.Instance.score > highestScore)
+        {
+            gameOverPanel.SetActive(true);
+            optionsTint.SetActive(true);
+            menuPanel.SetActive(false);
+            //SetSelection(gameOverPanel);
+        }
+        else
+        {
+            ShowMenu(); 
+        }
+      
     }
 
     public void SubmitScore()
     {
         // TODO store score
+        SaveScore(inField.text, GameHandler.Instance.score);
         gameOverPanel.SetActive(false); 
         optionsTint.SetActive(false);
         menuPanel.SetActive(true);
         ShowMenu(); 
+    }
+
+    public void SaveScore(string name, int score)
+    {
+        string scoreStr = name + "," + score.ToString() + "|";
+        string prefsStr = PlayerPrefs.GetString("Scores");
+        prefsStr += scoreStr;
+        PlayerPrefs.SetString("Scores", prefsStr); 
     }
 
     public Dictionary<string, int> GetScores()
