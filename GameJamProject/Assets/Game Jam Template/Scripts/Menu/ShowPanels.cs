@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic; 
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Linq; 
+using System.Linq;
+using System;
 
 public class ShowPanels : MonoBehaviour {
 
@@ -152,7 +153,7 @@ public class ShowPanels : MonoBehaviour {
 
     public void SubmitScore()
     {
-        // TODO store score
+        // store score
         SaveScore(inField.text, GameHandler.Instance.score);
         // Write high scores to panel text 
         string prefsStr = PlayerPrefs.GetString("Scores").Replace('|', '\n');
@@ -167,6 +168,7 @@ public class ShowPanels : MonoBehaviour {
 
     public void SaveScore(string name, int score)
     {
+        //Dictionary<string, int> scores = GetScores();
         string scoreStr = name + "," + score.ToString() + "|";
         string prefsStr = PlayerPrefs.GetString("Scores");
         prefsStr += scoreStr;
@@ -183,7 +185,7 @@ public class ShowPanels : MonoBehaviour {
         {
             dict = text.Split('|')
           .Select(s => s.Split(','))
-          .ToDictionary(key => key[0].Trim(), value => value[0].Trim());
+          .ToDictionary(key => key[0].Trim(), value => value[0].Trim(), StringComparer.OrdinalIgnoreCase);
         }
         
 
@@ -192,7 +194,7 @@ public class ShowPanels : MonoBehaviour {
             // do something with entry.Value or entry.Key
             int score = 0;
             int.TryParse(entry.Value, out score);
-            if(score > 0)
+            if(score > 0 && !scores.ContainsKey(entry.Key))
             {
                 scores.Add(entry.Key, score); 
             }
