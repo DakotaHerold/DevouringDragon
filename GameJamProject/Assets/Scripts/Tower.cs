@@ -12,6 +12,7 @@ public class Tower : MonoBehaviour
     private float coolTimer = 0.0f;
     private float coolTime = 0.25f;
     private float growth = 0;
+    private float arrowSpeed = 1f; 
 
     public delegate void EventAction();
     //public static event EventAction OnTowerEntered;
@@ -26,6 +27,8 @@ public class Tower : MonoBehaviour
     {
         growth = times;
         bounds.bounds.Expand(times);
+        coolTime /= 2f;
+        arrowSpeed += growth * 0.25f; 
     }
 	
 	// Update is called once per frame
@@ -97,7 +100,7 @@ public class Tower : MonoBehaviour
         GameObject arrowGO = Instantiate(GameHandler.Instance.arrowPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         Arrow arrow = arrowGO.GetComponent<Arrow>();
         arrow.direction = direction;
-        arrow.speed += growth * 0.25f;
+        arrow.speed = arrowSpeed;
         arrow.initialized = true;
     }
 
