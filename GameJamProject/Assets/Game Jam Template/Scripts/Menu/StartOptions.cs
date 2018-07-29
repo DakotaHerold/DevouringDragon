@@ -107,6 +107,11 @@ public class StartOptions : MonoBehaviour {
 		showPanels.HideMenu();
 	}
 
+    public void ShowDelayed()
+    {
+        //showPanels.ShowMenu(); 
+    }
+
 	public void StartGameInScene()
 	{
 		//Pause button now works if escape is pressed since we are no longer in Main menu.
@@ -121,6 +126,13 @@ public class StartOptions : MonoBehaviour {
         
         StartCoroutine(FadeCanvasGroupAlpha(1f,0f, menuCanvasGroup));
 	}
+
+    public void ReturnToMenu()
+    {
+        inMainMenu = true;
+
+        StartCoroutine(FadeCanvasGroupAlphaIn(0f, 1f, menuCanvasGroup)); 
+    }
 
     public IEnumerator FadeCanvasGroupAlpha(float startAlpha, float endAlpha, CanvasGroup canvasGroupToFadeAlpha)
     {
@@ -139,6 +151,21 @@ public class StartOptions : MonoBehaviour {
         HideDelayed();
         Debug.Log("Coroutine done. Game started in same scene! Put your game starting stuff here.");
         GameHandler.Instance.NewGame(); 
+    }
+
+    public IEnumerator FadeCanvasGroupAlphaIn(float startAlpha, float endAlpha, CanvasGroup canvasGroupToFadeAlpha)
+    {
+
+        float elapsedTime = 0f;
+        float totalDuration = menuSettingsData.menuFadeTime;
+
+        while (elapsedTime < totalDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            float currentAlpha = Mathf.Lerp(startAlpha, endAlpha, elapsedTime / totalDuration);
+            canvasGroupToFadeAlpha.alpha = currentAlpha;
+            yield return null;
+        }
     }
 
 

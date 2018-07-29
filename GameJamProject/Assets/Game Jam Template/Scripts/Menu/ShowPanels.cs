@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic; 
 using UnityEngine.EventSystems;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using System.Linq; 
 
 public class ShowPanels : MonoBehaviour {
 
@@ -15,6 +17,9 @@ public class ShowPanels : MonoBehaviour {
     public InputField inField;
     [Space(10)]
     public GameObject highScorePanel;
+
+    public Slider musicSlider;
+    public Slider fxSlider; 
 
     private GameObject activePanel;                         
     private MenuObject activePanelMenuObject;
@@ -103,6 +108,9 @@ public class ShowPanels : MonoBehaviour {
 
     public void ShowGameOverPanel()
     {
+        Dictionary<string, int> scores = GetScores(); 
+
+        //if(scores.Count < 3 || )
         gameOverPanel.SetActive(true);
         optionsTint.SetActive(true);
         menuPanel.SetActive(false);
@@ -117,4 +125,40 @@ public class ShowPanels : MonoBehaviour {
         menuPanel.SetActive(true);
         ShowMenu(); 
     }
+
+    public Dictionary<string, int> GetScores()
+    {
+        Dictionary<string, int> scores = new Dictionary<string, int>();
+
+        string text = PlayerPrefs.GetString("Scores");
+        Dictionary<string, string> dict = text.Split('|')
+      .Select(s => s.Split(','))
+      .ToDictionary(key => key[0].Trim(), value => value[1].Trim());
+
+        foreach (KeyValuePair<string, string> entry in dict)
+        {
+            // do something with entry.Value or entry.Key
+            int score = 0;
+            int.TryParse(entry.Value, out score);
+            if(score > 0)
+            {
+                scores.Add(entry.Key, score); 
+            }
+            
+        }
+
+        return scores; 
+    }
+
+    float GetMusicVolume()
+    {
+        return musicSlider.value; 
+    }
+
+    float GetFXVolume()
+    {
+        return fxSlider.value; 
+    }
 }
+
+
