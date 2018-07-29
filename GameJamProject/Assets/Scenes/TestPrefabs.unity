@@ -582,9 +582,67 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 22444764, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.5437012
+      objectReference: {fileID: 0}
+    - target: {fileID: 22470916, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6152344
+      objectReference: {fileID: 0}
+    - target: {fileID: 224352039613686342, guid: 45616935e4fe10f48b62da1347801a16,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6152344
+      objectReference: {fileID: 0}
+    - target: {fileID: 224054095110793242, guid: 45616935e4fe10f48b62da1347801a16,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6152344
+      objectReference: {fileID: 0}
+    - target: {fileID: 224801157143181390, guid: 45616935e4fe10f48b62da1347801a16,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.199219
+      objectReference: {fileID: 0}
+    - target: {fileID: 224258397371233860, guid: 45616935e4fe10f48b62da1347801a16,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.199219
+      objectReference: {fileID: 0}
+    - target: {fileID: 224316632372660608, guid: 45616935e4fe10f48b62da1347801a16,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6152344
+      objectReference: {fileID: 0}
+    - target: {fileID: 22405856, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.6152344
+      objectReference: {fileID: 0}
+    - target: {fileID: 22428340, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.199219
+      objectReference: {fileID: 0}
+    - target: {fileID: 224980117588995366, guid: 45616935e4fe10f48b62da1347801a16,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 9.199219
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 45616935e4fe10f48b62da1347801a16, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1196366140 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11432662, guid: 45616935e4fe10f48b62da1347801a16,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196366139}
+  m_Script: {fileID: 11500000, guid: 4a7723679572e4ade879f5906cde74eb, type: 3}
+--- !u!114 &1196366141 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11488040, guid: 45616935e4fe10f48b62da1347801a16,
+    type: 2}
+  m_PrefabInternal: {fileID: 1196366139}
+  m_Script: {fileID: 11500000, guid: b4a5fa76fe0a547ee842d7fecb84c442, type: 3}
 --- !u!1 &1558123228
 GameObject:
   m_ObjectHideFlags: 0
@@ -861,8 +919,8 @@ MonoBehaviour:
   - {fileID: 1873364329652540, guid: 4ad0188ec75673242977bb72be1e3dc6, type: 2}
   arrowPrefab: {fileID: 1166803058009150, guid: f1325325d8ffc6442966f9e0592a98c9,
     type: 2}
-  menuController: {fileID: 0}
-  startOptions: {fileID: 0}
+  menuController: {fileID: 1196366140}
+  startOptions: {fileID: 1196366141}
   playerSpeed: 5
   spawnDelay: 2
   spawnInterval: 20
