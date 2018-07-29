@@ -23,13 +23,13 @@ public class PlayerController : MonoBehaviour {
 
     private float timerIncrement = 0.5f;
 
-    private bool movingUp = false; 
-    private float currentYSpeed = 0.0f;
+    //private bool movingUp = false; 
+    //private float currentYSpeed = 0.0f;
     private float maxYPos; 
     private float minYPos;
-    private float ySpeed = 1.0f;
-    private float maxYSpeed = 10.0f;
-    private float minYSpeed = 5.0f;
+    //private float ySpeed = 1.0f;
+    //private float maxYSpeed = 10.0f;
+    //private float minYSpeed = 5.0f;
     private float maxXPos = 8f;
     private float minXPos = -8f;
 
@@ -52,7 +52,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public bool hitWall = false; 
+    public bool hitWall = false;
+
+    private Animator animController; 
 
     // Use this for initialization
     void Start () {
@@ -61,12 +63,14 @@ public class PlayerController : MonoBehaviour {
         maxYPos = minYPos + 6.0f;
 
         baseScale = new Vector2(transform.localScale.x, transform.localScale.y);
-        minScale = new Vector2(0.1f, 0.1f); 
+        minScale = new Vector2(0.1f, 0.1f);
+        animController = GetComponent<Animator>(); 
     }
 	
 	// Update is called once per frame
 	void Update () {
 
+        // Is Game paused? 
         if (GameHandler.Instance.playerSpeed == 0)
             return; 
 
@@ -110,14 +114,28 @@ public class PlayerController : MonoBehaviour {
                 newPos.x -= currentDriftSpeed * Time.deltaTime;
             }
         }
+
+        if(newPos.x < minXPos)
+        {
+            animController.SetTrigger("HitLeft"); 
+        }
+        else if(newPos.x > maxXPos)
+        {
+            animController.SetTrigger("HitRight");
+        }
+
         newPos.x = Mathf.Clamp(newPos.x, minXPos, maxXPos);
 
         float vMovement = InputHandler.Instance.GetVerticalMovement(); 
         if (vMovement != 0)
         {
+            animController.SetBool("Flapping", true); 
             float ySpeed = vMovement * (currentDriftSpeed/2.0f); 
             newPos.y += ySpeed * Time.deltaTime; 
         }
+        else
+            animController.SetBool("Flapping", false);
+
 
         //if(movingUp)
         //{
@@ -184,6 +202,11 @@ public class PlayerController : MonoBehaviour {
         }
 
         
+    }
+
+    public void TriggerEat()
+    {
+        animController.SetTrigger("Eat"); 
     }
 
     public void Grow()

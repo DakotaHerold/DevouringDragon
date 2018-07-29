@@ -60,8 +60,12 @@ public class GameHandler : Singleton<GameHandler>
     private float lastTowerSpawn = 0;
     private float pausedPlayerSpeed = -1f;
 
+    private PlayerController player; 
+
     public void NewGame()
     {
+        player = FindObjectOfType<PlayerController>(); 
+
         distanceTraveled = 0f;
 
         // Clean out old prefabs...
@@ -111,6 +115,11 @@ public class GameHandler : Singleton<GameHandler>
         {
             fxPlayer.PlayOneShot(clipList[index], menuController.GetFXVolume());
         }
+    }
+
+    public void TriggerEat()
+    {
+        player.TriggerEat(); 
     }
 
     private void FixedUpdate()

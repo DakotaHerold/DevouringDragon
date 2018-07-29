@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 114953937195390446}
   - component: {fileID: 58006440885772424}
   - component: {fileID: 50057750287457896}
+  - component: {fileID: 95454570736059922}
   m_Layer: 0
   m_Name: Dragon
   m_TagString: Player
@@ -38,7 +39,7 @@ Transform:
   m_GameObject: {fileID: 1244370703796952}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -3, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -77,7 +78,25 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 3
+  m_Radius: 2
+--- !u!95 &95454570736059922
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1244370703796952}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fb395b2172c42b046a2221d00ede63fb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114953937195390446
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,7 +108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3a15311913ad5c4c804723dd24526ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shrinkOffset: 0.01
+  shrinkOffset: 0.1
   growthOffset: 0.1
   hitWall: 0
 --- !u!212 &212480654957679490
@@ -127,7 +146,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 20df1a443bb7dd445abf482e23f98d01, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4608d1452db78e04d91ceab6e99c3c35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
