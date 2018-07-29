@@ -463,10 +463,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   points: 1
-  soundList:
-  - {fileID: 82331261322035518}
-  - {fileID: 82399197587440328}
-  - {fileID: 82837665591962250}
+  minSound: 5
+  maxSound: 7
 --- !u!212 &212421217763748510
 SpriteRenderer:
   m_ObjectHideFlags: 1

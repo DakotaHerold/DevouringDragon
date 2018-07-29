@@ -15,7 +15,21 @@ public class GameHandler : Singleton<GameHandler>
     public List<GameObject> towers;
     public GameObject arrowPrefab;
     public ShowPanels menuController;
-    public StartOptions startOptions; 
+    public StartOptions startOptions;
+    public AudioSource fxPlayer;
+    public List<AudioClip> clipList;
+
+    public enum AudioClipIndex
+    {
+        MOO1,
+        MOO2,
+        BAH1,
+        BAH2,
+        BAH3,
+        YELL1,
+        YELL2,
+        YELL3
+    }
 
     public float playerSpeed; // How fast to scroll and simulate the player speed through the world
     public float spawnDelay; // Current time between spawns
@@ -82,6 +96,14 @@ public class GameHandler : Singleton<GameHandler>
     {
         NewGame();
         PauseGame();
+    }
+
+    public void PlaySound(int index)
+    {
+        if(clipList.Count > index)
+        {
+            fxPlayer.PlayOneShot(clipList[index], menuController.GetFXVolume());
+        }
     }
 
     private void FixedUpdate()
