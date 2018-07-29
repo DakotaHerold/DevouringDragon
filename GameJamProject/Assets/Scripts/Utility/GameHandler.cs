@@ -14,7 +14,8 @@ public class GameHandler : Singleton<GameHandler>
     public List<GameObject> edibles;
     public List<GameObject> towers;
     public GameObject arrowPrefab;
-    public ShowPanels menuController; 
+    public ShowPanels menuController;
+    public StartOptions startOptions; 
 
     public float playerSpeed; // How fast to scroll and simulate the player speed through the world
     public float spawnDelay; // Current time between spawns
@@ -72,6 +73,7 @@ public class GameHandler : Singleton<GameHandler>
     public void GameOver()
     {
         PauseGame();
+        startOptions.ReturnToMenu(); 
         menuController.ShowGameOverPanel(); 
     }
 
