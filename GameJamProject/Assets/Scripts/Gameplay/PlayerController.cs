@@ -58,6 +58,8 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+        // CAREFUL. DELETES HIGH SCORES
+        //PlayerPrefs.SetString("Scores", ""); 
         coolDownTimer = coolDownBase;
         minYPos = transform.position.y;
         maxYPos = minYPos + 6.0f;

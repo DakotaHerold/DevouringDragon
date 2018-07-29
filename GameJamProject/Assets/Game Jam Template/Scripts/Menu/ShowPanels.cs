@@ -42,6 +42,8 @@ public class ShowPanels : MonoBehaviour {
     public void Start()
     {
         //SetSelection(menuPanel);
+        string prefsStr = PlayerPrefs.GetString("Scores").Replace('|', '\n');
+        highScoresText.text = prefsStr;
     }
 
     //Call this function to activate and display the Options panel during the main menu
