@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84b076df0948e4408beb244a0f9ea01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bounds: {fileID: 58877070766996536}
   points: 0
   targetingOffsetX: 2
 --- !u!212 &212709132481015306

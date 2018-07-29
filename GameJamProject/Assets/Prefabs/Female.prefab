@@ -462,7 +462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d32b1acdc2b309245a5b701a1053cc00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  points: 1
+  points: 1000
   minSound: 5
   maxSound: 7
 --- !u!212 &212421217763748510

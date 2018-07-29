@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Tower : MonoBehaviour
 {
-    private Collider2D bounds; 
+    public Collider2D bounds; 
     public int points;
     public float targetingOffsetX = 2f;
 
     private bool coolingDown = false;
     private float coolTimer = 0.0f;
-    private float coolTime = 0.25f; 
+    private float coolTime = 0.25f;
+    private float growth = 0;
 
     public delegate void EventAction();
     //public static event EventAction OnTowerEntered;
@@ -18,12 +19,18 @@ public class Tower : MonoBehaviour
 
     // Use this for initialization
     void Start () {
-        bounds = GetComponent<Collider2D>();
         coolTimer = coolTime; 
 	}
+
+    public void Grow(float times)
+    {
+        growth = times;
+        bounds.bounds.Expand(times);
+    }
 	
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
         float dist = GameHandler.Instance.playerSpeed * Time.deltaTime;
         this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - dist);
         if (this.gameObject.transform.position.y < -20) TowerDestroyed();
@@ -87,6 +94,7 @@ public class Tower : MonoBehaviour
         GameObject arrowGO = Instantiate(GameHandler.Instance.arrowPrefab, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
         Arrow arrow = arrowGO.GetComponent<Arrow>();
         arrow.direction = direction;
+        arrow.speed += growth * 0.25f;
         arrow.initialized = true;
     }
 

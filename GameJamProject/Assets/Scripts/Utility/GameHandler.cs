@@ -59,6 +59,7 @@ public class GameHandler : Singleton<GameHandler>
     private float nextSpawnInterval = 0f;
     private float lastTowerSpawn = 0;
     private float pausedPlayerSpeed = -1f;
+    private float timesGrown = 0;
 
     private PlayerController player; 
 
@@ -148,7 +149,9 @@ public class GameHandler : Singleton<GameHandler>
             {
                 lastTowerSpawn = curTime;
                 index = Mathf.RoundToInt(Random.value * (towers.Count-1));
-                Instantiate(towers[index], new Vector3(lane1.position.x + fudgeX, lane1.position.y), Quaternion.identity);
+                GameObject go = Instantiate(towers[index], new Vector3(lane1.position.x + fudgeX, lane1.position.y), Quaternion.identity);
+                Tower t = go.GetComponent<Tower>();
+                t.Grow(timesGrown);
             }
         }
         if (curTime > nextSpawnTime2)
@@ -165,7 +168,9 @@ public class GameHandler : Singleton<GameHandler>
             {
                 lastTowerSpawn = curTime;
                 index = Mathf.RoundToInt(Random.value * (towers.Count-1));
-                Instantiate(towers[index], new Vector3(lane2.position.x + fudgeX, lane2.position.y), Quaternion.identity);
+                GameObject go = Instantiate(towers[index], new Vector3(lane2.position.x + fudgeX, lane2.position.y), Quaternion.identity);
+                Tower t = go.GetComponent<Tower>();
+                t.Grow(timesGrown);
             }
         }
         if (curTime  > nextSpawnTime3)
@@ -182,7 +187,9 @@ public class GameHandler : Singleton<GameHandler>
             {
                 lastTowerSpawn = curTime;
                 index = Mathf.RoundToInt(Random.value * (towers.Count-1));
-                Instantiate(towers[index], new Vector3(lane3.position.x + fudgeX, lane3.position.y), Quaternion.identity);
+                GameObject go = Instantiate(towers[index], new Vector3(lane3.position.x + fudgeX, lane3.position.y), Quaternion.identity);
+                Tower t = go.GetComponent<Tower>();
+                t.Grow(timesGrown);
             }
         }
         if (curTime > nextSpawnInterval)
@@ -191,6 +198,7 @@ public class GameHandler : Singleton<GameHandler>
             nextSpawnInterval = lastSpawnInterval + spawnInterval;
             playerSpeed += 1f;
             spawnDelay = spawnDelay * 0.75f;
+            timesGrown += 1f;
         }
         if(scoreBox != null) scoreBox.text = "Score: " + score;
     }
