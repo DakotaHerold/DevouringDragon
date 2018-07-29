@@ -110,7 +110,7 @@ public class ShowPanels : MonoBehaviour {
     {
         Dictionary<string, int> scores = GetScores(); 
 
-        //if(scores.Count < 3 || )
+        //if(scores.Count < 3 || GameHandler.Instance.score > )
         gameOverPanel.SetActive(true);
         optionsTint.SetActive(true);
         menuPanel.SetActive(false);
@@ -150,12 +150,12 @@ public class ShowPanels : MonoBehaviour {
         return scores; 
     }
 
-    float GetMusicVolume()
+    public float GetMusicVolume()
     {
         return musicSlider.value; 
     }
 
-    float GetFXVolume()
+    public float GetFXVolume()
     {
         return fxSlider.value; 
     }
