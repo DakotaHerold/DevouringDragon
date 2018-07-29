@@ -79,8 +79,8 @@ public class GameHandler : Singleton<GameHandler>
 
     private void Start()
     {
-        //NewGame();
-        //PauseGame();
+        NewGame();
+        PauseGame();
     }
 
     private void FixedUpdate()

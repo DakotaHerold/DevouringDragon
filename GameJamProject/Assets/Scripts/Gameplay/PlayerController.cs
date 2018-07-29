@@ -67,6 +67,9 @@ public class PlayerController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+        if (GameHandler.Instance.playerSpeed == 0)
+            return; 
+
         //if (hitWall)
         //    return; 
 

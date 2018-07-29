@@ -150,7 +150,8 @@ public class StartOptions : MonoBehaviour {
 
         HideDelayed();
         Debug.Log("Coroutine done. Game started in same scene! Put your game starting stuff here.");
-        GameHandler.Instance.NewGame(); 
+        GameHandler.Instance.NewGame();
+        GameHandler.Instance.UnPauseGame(); 
     }
 
     public IEnumerator FadeCanvasGroupAlphaIn(float startAlpha, float endAlpha, CanvasGroup canvasGroupToFadeAlpha)
