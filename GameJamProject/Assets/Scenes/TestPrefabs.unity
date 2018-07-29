@@ -1055,6 +1055,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6ef4f2616225e09448d857bc7f544829, type: 3}
   - {fileID: 8300000, guid: d33f80e259a869246aa728719d19c81c, type: 3}
   - {fileID: 8300000, guid: e508e68e83c572c4f9b234a117a446a1, type: 3}
+  - {fileID: 8300000, guid: 807bb4f8e19919f43be4f9429127abee, type: 3}
+  - {fileID: 8300000, guid: 2a324a0e876fc3c4da9eb7270dd7ed6f, type: 3}
+  - {fileID: 8300000, guid: 6710f316f08c0b443acfb900c1d222ae, type: 3}
+  - {fileID: 8300000, guid: 92a9221a4d14edc4d9ce1e7f57343c00, type: 3}
+  - {fileID: 8300000, guid: 10cc9baab8280124cb992b369a1ce0e9, type: 3}
   playerSpeed: 5
   spawnDelay: 2
   spawnInterval: 20

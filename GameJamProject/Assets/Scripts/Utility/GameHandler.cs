@@ -28,7 +28,12 @@ public class GameHandler : Singleton<GameHandler>
         BAH3,
         YELL1,
         YELL2,
-        YELL3
+        YELL3,
+        EAT1,
+        EAT2,
+        EAT3,
+        EAT4,
+        EAT5
     }
 
     public float playerSpeed; // How fast to scroll and simulate the player speed through the world
