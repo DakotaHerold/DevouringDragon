@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.EventSystems;
+using UnityEngine.UI; 
 
 public class ShowPanels : MonoBehaviour {
 
@@ -8,7 +9,12 @@ public class ShowPanels : MonoBehaviour {
 	public GameObject optionsTint;							//Store a reference to the Game Object OptionsTint 
 	public GameObject menuPanel;							//Store a reference to the Game Object MenuPanel 
 	public GameObject pausePanel;                           //Store a reference to the Game Object PausePanel 
-    public GameObject creditsPanel; 
+    public GameObject creditsPanel;
+    [Space(10)]
+    public GameObject gameOverPanel;
+    public InputField inField;
+    [Space(10)]
+    public GameObject highScorePanel;
 
     private GameObject activePanel;                         
     private MenuObject activePanelMenuObject;
@@ -94,4 +100,21 @@ public class ShowPanels : MonoBehaviour {
 		optionsTint.SetActive(false);
 
 	}
+
+    public void ShowGameOverPanel()
+    {
+        gameOverPanel.SetActive(true);
+        optionsTint.SetActive(true);
+        menuPanel.SetActive(false);
+        SetSelection(gameOverPanel);
+    }
+
+    public void SubmitScore()
+    {
+        // TODO store score
+        gameOverPanel.SetActive(false); 
+        optionsTint.SetActive(false);
+        menuPanel.SetActive(true);
+        ShowMenu(); 
+    }
 }
