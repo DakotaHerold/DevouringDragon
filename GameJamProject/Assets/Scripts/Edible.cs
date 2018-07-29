@@ -22,6 +22,7 @@ public class Edible : MonoBehaviour {
     {
         EdibleDestroyed(true);
         GameHandler.Instance.PlaySound((int)minSound + Mathf.RoundToInt(Random.value * (((int)maxSound - (int)minSound))));
+        GameHandler.Instance.TriggerEat();
     }
 
     public void EdibleDestroyed(bool byPlayer = true)

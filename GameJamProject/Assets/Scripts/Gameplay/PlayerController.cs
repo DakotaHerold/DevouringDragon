@@ -204,9 +204,13 @@ public class PlayerController : MonoBehaviour {
         
     }
 
+    public GameHandler.AudioClipIndex minSound;
+    public GameHandler.AudioClipIndex maxSound;
+
     public void TriggerEat()
     {
-        animController.SetTrigger("Eat"); 
+        animController.SetTrigger("Eat");
+        GameHandler.Instance.PlaySound((int)minSound + Mathf.RoundToInt(Random.value * (((int)maxSound - (int)minSound))));
     }
 
     public void Grow()
