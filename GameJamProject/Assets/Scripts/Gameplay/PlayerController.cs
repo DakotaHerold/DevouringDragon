@@ -105,7 +105,13 @@ public class PlayerController : MonoBehaviour {
                 newPos.x -= currentDriftSpeed * Time.deltaTime;
             }
         }
-        
+
+        float vMovement = InputHandler.Instance.GetVerticalMovement(); 
+        if (vMovement != 0)
+        {
+            float ySpeed = vMovement * (currentDriftSpeed/2.0f); 
+            newPos.y += ySpeed * Time.deltaTime; 
+        }
 
         //if(movingUp)
         //{

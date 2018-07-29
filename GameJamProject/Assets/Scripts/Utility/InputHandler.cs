@@ -20,6 +20,23 @@ public class PlayerInputData
             swerve = value;
         }
     }
+
+    private float verticalMovement;
+
+    public float VerticalMovement
+    {
+        get
+        {
+            return verticalMovement;
+        }
+
+        set
+        {
+            verticalMovement = value;
+        }
+    }
+
+    
 }
 
 public class InputHandler : Singleton<InputHandler>
@@ -50,13 +67,19 @@ public class InputHandler : Singleton<InputHandler>
         //{
             // Update input from rewired for each player here 
             // Example:  players[iPlayer].isJumpDown = rewiredPlayers[iPlayer].GetButtonDown(RewiredConsts.Action.Jump);
-        players[0].Swerve = rewiredPlayers[0].GetButtonDown(RewiredConsts.Action.Swerve); 
+        players[0].Swerve = rewiredPlayers[0].GetButtonDown(RewiredConsts.Action.Swerve);
+        players[0].VerticalMovement = rewiredPlayers[0].GetAxis(RewiredConsts.Action.VerticalMovement); 
         //}
     }
 
     public bool SwervedPressed()
     {
         return players[0].Swerve; 
+    }
+
+    public float GetVerticalMovement()
+    {
+        return players[0].VerticalMovement; 
     }
 }
 
