@@ -153,11 +153,39 @@ public class ShowPanels : MonoBehaviour {
 
     public void SubmitScore()
     {
-        // store score
-        SaveScore(inField.text, GameHandler.Instance.score);
-        // Write high scores to panel text 
-        string prefsStr = PlayerPrefs.GetString("Scores").Replace('|', '\n');
-        highScoresText.text = prefsStr; 
+        bool addScore = true; 
+        Dictionary<string, int> scores = GetScores();
+        foreach (KeyValuePair<string, int> entry in scores)
+        {
+            // do something with entry.Value or entry.Key
+            if(entry.Key == inField.text)
+            {
+                if(entry.Value >= GameHandler.Instance.score)
+                {
+                    addScore = false; 
+                }
+                else
+                {
+                    string strToReplace = entry.Key + "," + entry.Value; 
+                    string basePrefsStr = PlayerPrefs.GetString("Scores");
+                    basePrefsStr = basePrefsStr.Replace(strToReplace, "");
+                    PlayerPrefs.SetString("Scores", basePrefsStr); 
+                }
+                break; 
+            }
+        }
+
+
+        // TODO, check score greater than zero
+        if(addScore && GameHandler.Instance.score > 0)
+        {
+            // store score
+            SaveScore(inField.text, GameHandler.Instance.score);
+            // Write high scores to panel text 
+            string prefsStr = PlayerPrefs.GetString("Scores").Replace('|', '\n');
+            highScoresText.text = prefsStr;
+        }
+      
 
 
         gameOverPanel.SetActive(false); 
@@ -172,6 +200,7 @@ public class ShowPanels : MonoBehaviour {
         string scoreStr = name + "," + score.ToString() + "|";
         string prefsStr = PlayerPrefs.GetString("Scores");
         prefsStr += scoreStr;
+        prefsStr.Trim(); 
         PlayerPrefs.SetString("Scores", prefsStr); 
     }
 
@@ -181,11 +210,24 @@ public class ShowPanels : MonoBehaviour {
         Dictionary<string, string> dict = new Dictionary<string, string>(); 
 
         string text = PlayerPrefs.GetString("Scores");
+        text.Trim(); 
         if(text.Length > 0)
         {
-            dict = text.Split('|')
-          .Select(s => s.Split(','))
-          .ToDictionary(key => key[0].Trim(), value => value[0].Trim(), StringComparer.OrdinalIgnoreCase);
+            IEnumerable<string[]> tempStrs = text.Split('|')
+           .Select(s => s.Split(','));
+
+            List<string[]> newStrs = new List<string[]>(); 
+
+            foreach (string[] entry in tempStrs)
+            {
+                if(entry[0] != "")
+                {
+                    newStrs.Add(entry); 
+                }
+            }
+            
+
+          dict = newStrs.ToDictionary(key => key[0].Trim(), value => value[1].Trim()); //, StringComparer.OrdinalIgnoreCase
         }
         
 
@@ -194,10 +236,8 @@ public class ShowPanels : MonoBehaviour {
             // do something with entry.Value or entry.Key
             int score = 0;
             int.TryParse(entry.Value, out score);
-            if(score > 0 && !scores.ContainsKey(entry.Key))
-            {
-                scores.Add(entry.Key, score); 
-            }
+            scores.Add(entry.Key, score); 
+            
             
         }
 
